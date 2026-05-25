@@ -27,18 +27,29 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <>
       <header
         className={cn(
           "fixed top-0 z-50 w-full transition-all duration-500",
           isScrolled
-            ? "bg-neutral-950/70 backdrop-blur-xl py-3"
+            ? "bg-neutral-950/70 backdrop-blur-xl py-3 border-b border-white/5"
             : "bg-transparent py-6",
         )}
       >
         <nav className="container mx-auto flex items-center justify-between px-6">
-          <Link href="/" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 group relative z-[60]">
             <div className="relative">
               <Ship className="h-8 w-8 text-blue-500 transition-transform group-hover:scale-110" />
               <div className="absolute -inset-1 bg-blue-500/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -70,55 +81,63 @@ export function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white"
+            className="md:hidden text-white relative z-[60]"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (
-              <X className="h-6 w-6" />
+              <X className="h-8 w-8" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-8 w-8" />
             )}
           </button>
         </nav>
 
-        {/* Mobile Nav */}
-        <AnimatePresence>
+        {/* Mobile Nav Overlay */}
+        <AnimatePresence mode="wait">
           {mobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="absolute top-full left-0 w-full overflow-hidden bg-neutral-900/95 backdrop-blur-lg border-b border-white/10 md:hidden"
+              initial={{ opacity: 0, x: "100%" }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed inset-0 z-[55] flex flex-col bg-neutral-950 md:hidden"
             >
-              <div className="flex flex-col gap-6 p-8">
-                {navigation.map((item, idx) => (
-                  <motion.div
-                    key={item.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.1 }}
-                  >
-                    <Link
-                      href={item.href}
-                      className="text-2xl font-bold text-neutral-300 hover:text-white"
-                      onClick={() => setMobileMenuOpen(false)}
+              <div className="flex flex-col h-full p-8 pt-32">
+                <div className="flex flex-col gap-10">
+                  {navigation.map((item, idx) => (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 + idx * 0.1 }}
                     >
-                      {item.name}
-                    </Link>
-                  </motion.div>
-                ))}
-                <motion.button
-                  initial={{ opacity: 0, y: 10 }}
+                      <Link
+                        href={item.href}
+                        className="text-6xl font-black tracking-tighter text-neutral-500 hover:text-white transition-colors"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    setIsQuoteOpen(true);
-                  }}
-                  className="mt-4 rounded-xl bg-blue-600 px-6 py-4 text-center font-bold text-white"
+                  transition={{ delay: 0.5 }}
+                  className="mt-auto mb-10"
                 >
-                  Get a Quote
-                </motion.button>
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setIsQuoteOpen(true);
+                    }}
+                    className="w-full rounded-2xl bg-blue-600 py-6 text-2xl font-black text-white shadow-2xl shadow-blue-500/20 active:scale-[0.98] transition-transform"
+                  >
+                    Get a Quote
+                  </button>
+                </motion.div>
               </div>
             </motion.div>
           )}
