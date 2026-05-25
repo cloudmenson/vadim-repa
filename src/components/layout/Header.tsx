@@ -73,7 +73,7 @@ export function Header() {
             ))}
             <button
               onClick={() => setIsQuoteOpen(true)}
-              className="relative overflow-hidden rounded-full bg-blue-600 px-7 py-2.5 text-sm font-bold text-white transition-all hover:bg-blue-500 hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] active:scale-95"
+              className="relative overflow-hidden rounded-full bg-blue-600 px-7 py-2.5 text-sm font-bold text-white transition-all hover:bg-blue-500 hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] active:scale-95 cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500 outline-none"
             >
               Get a Quote
             </button>
@@ -81,7 +81,7 @@ export function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white relative z-[60]"
+            className="md:hidden text-white relative z-[60] cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500 outline-none"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (

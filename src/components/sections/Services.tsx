@@ -105,7 +105,8 @@ export function Services() {
               key={index}
               variants={cardVariants}
               whileHover={{ y: -10 }}
-              className="group relative p-10 rounded-3xl bg-neutral-900 border border-white/5 hover:border-blue-500/30 transition-colors duration-500"
+              tabIndex={0}
+              className="group relative p-10 rounded-3xl bg-neutral-900 border border-white/5 hover:border-blue-500/30 transition-colors duration-500 cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500/50 outline-none"
             >
               {/* Glow Effect */}
               <div className="absolute inset-0 rounded-3xl bg-blue-500/0 group-hover:bg-blue-500/[0.02] transition-colors duration-500" />

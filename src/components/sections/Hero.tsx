@@ -94,12 +94,12 @@ export function Hero() {
             >
               <button
                 onClick={() => setIsQuoteOpen(true)}
-                className="group relative w-full sm:w-auto flex items-center justify-center gap-3 rounded-full bg-white px-10 py-5 text-lg font-black text-neutral-950 hover:bg-blue-500 hover:text-white transition-all active:scale-95"
+                className="group relative w-full sm:w-auto flex items-center justify-center gap-3 rounded-full bg-white px-10 py-5 text-lg font-black text-neutral-950 hover:bg-blue-500 hover:text-white transition-all active:scale-95 cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-blue-500/50"
               >
                 Start Shipping{" "}
                 <ArrowRight className="h-6 w-6 group-hover:translate-x-2 transition-transform" />
               </button>
-              <button className="group w-full sm:w-auto flex items-center justify-center gap-3 rounded-full bg-neutral-900/50 backdrop-blur-md border border-white/10 px-10 py-5 text-lg font-bold text-white hover:bg-white/10 transition-all">
+              <button className="group w-full sm:w-auto flex items-center justify-center gap-3 rounded-full bg-neutral-900/50 backdrop-blur-md border border-white/10 px-10 py-5 text-lg font-bold text-white hover:bg-white/10 transition-all cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-white/20">
                 Watch Process{" "}
                 <Play className="h-5 w-5 fill-current group-hover:scale-125 transition-transform" />
               </button>

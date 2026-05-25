@@ -36,7 +36,7 @@ export function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
               </div>
               <button
                 onClick={onClose}
-                className="rounded-full p-2 hover:bg-white/5 transition-colors"
+                className="rounded-full p-2 hover:bg-white/5 transition-colors cursor-pointer"
               >
                 <X className="h-6 w-6" />
               </button>
@@ -49,7 +49,7 @@ export function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                   <input
                     type="text"
                     placeholder="John Doe"
-                    className="w-full rounded-lg border border-white/5 bg-neutral-800 px-4 py-2.5 text-sm outline-none focus:border-blue-500/50 transition-colors"
+                    className="w-full rounded-lg border border-white/5 bg-neutral-800 px-4 py-2.5 text-sm outline-none focus:border-blue-500/50 transition-colors focus:ring-1 focus:ring-blue-500/30"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -57,19 +57,21 @@ export function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                   <input
                     type="email"
                     placeholder="john@example.com"
-                    className="w-full rounded-lg border border-white/5 bg-neutral-800 px-4 py-2.5 text-sm outline-none focus:border-blue-500/50 transition-colors"
+                    className="w-full rounded-lg border border-white/5 bg-neutral-800 px-4 py-2.5 text-sm outline-none focus:border-blue-500/50 transition-colors focus:ring-1 focus:ring-blue-500/30"
                   />
                 </div>
               </div>
 
               <div className="space-y-1.5">
                 <label className="text-xs font-medium text-neutral-400 uppercase tracking-wider">Service Type</label>
-                <select className="w-full appearance-none rounded-lg border border-white/5 bg-neutral-800 px-4 py-2.5 text-sm outline-none focus:border-blue-500/50 transition-colors">
-                  <option>Road Freight</option>
-                  <option>Air Cargo</option>
-                  <option>Ocean Freight</option>
-                  <option>Warehousing</option>
-                </select>
+                <div className="relative">
+                  <select className="w-full appearance-none rounded-lg border border-white/5 bg-neutral-800 px-4 py-2.5 text-sm outline-none focus:border-blue-500/50 transition-colors cursor-pointer focus:ring-1 focus:ring-blue-500/30">
+                    <option>Road Freight</option>
+                    <option>Air Cargo</option>
+                    <option>Ocean Freight</option>
+                    <option>Warehousing</option>
+                  </select>
+                </div>
               </div>
 
               <div className="space-y-1.5">
@@ -77,13 +79,13 @@ export function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                 <textarea
                   rows={4}
                   placeholder="Tell us about your requirements..."
-                  className="w-full rounded-lg border border-white/5 bg-neutral-800 px-4 py-2.5 text-sm outline-none focus:border-blue-500/50 transition-colors resize-none"
+                  className="w-full rounded-lg border border-white/5 bg-neutral-800 px-4 py-2.5 text-sm outline-none focus:border-blue-500/50 transition-colors resize-none focus:ring-1 focus:ring-blue-500/30"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 rounded-xl bg-blue-600 py-3.5 font-bold text-white hover:bg-blue-500 transition-all active:scale-[0.98]"
+                className="w-full flex items-center justify-center gap-2 rounded-xl bg-blue-600 py-3.5 font-bold text-white hover:bg-blue-500 transition-all active:scale-[0.98] cursor-pointer"
               >
                 Send Request <Send className="h-4 w-4" />
               </button>

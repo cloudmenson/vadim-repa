@@ -64,13 +64,13 @@ export function FAQ() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="rounded-2xl border border-white/5 bg-neutral-900 overflow-hidden"
+                className="group rounded-2xl border border-white/5 bg-neutral-900 overflow-hidden hover:border-blue-500/50 transition-colors"
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                  className="w-full flex items-center justify-between p-6 text-left hover:bg-white/[0.02] transition-colors"
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-white/[0.02] transition-colors outline-none focus-visible:bg-white/[0.05] focus-visible:ring-1 focus-visible:ring-blue-500/50"
                 >
-                  <span className="text-lg font-bold text-white uppercase tracking-tight">{faq.question}</span>
+                  <span className="text-lg font-bold text-white uppercase tracking-tight cursor-pointer">{faq.question}</span>
                   {openIndex === i ? (
                     <Minus className="h-5 w-5 text-blue-500" />
                   ) : (
@@ -85,7 +85,7 @@ export function FAQ() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <div className="p-6 pt-0 text-neutral-400 leading-relaxed">
+                      <div className="px-6 pb-6 pt-2 text-neutral-400 leading-relaxed">
                         {faq.answer}
                       </div>
                     </motion.div>
