@@ -8,12 +8,31 @@ import { QuoteModal } from "@/components/ui/QuoteModal";
 export function Hero() {
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoOpacity, setVideoOpacity] = useState(1);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch((error) => {
+    const video = videoRef.current;
+    if (video) {
+      // Set to normal speed
+      video.playbackRate = 1.0;
+      video.play().catch((error) => {
         console.error("Autoplay failed:", error);
       });
+
+      const handleTimeUpdate = () => {
+        const duration = video.duration;
+        const currentTime = video.currentTime;
+        
+        // Very fast fade out 0.2s before end, and fade in 0.2s after start to mask the jerk
+        if (duration > 0 && duration - currentTime < 0.2) {
+          setVideoOpacity(0);
+        } else {
+          setVideoOpacity(1);
+        }
+      };
+
+      video.addEventListener("timeupdate", handleTimeUpdate);
+      return () => video.removeEventListener("timeupdate", handleTimeUpdate);
     }
   }, []);
 
@@ -39,7 +58,7 @@ export function Hero() {
 
   return (
     <>
-      <section className="relative h-[100vh] w-full overflow-hidden">
+      <section className="relative h-[100vh] w-full overflow-hidden bg-neutral-950">
         {/* Background Video */}
         <div className="absolute inset-0 z-0 scale-105">
           <video
@@ -48,7 +67,8 @@ export function Hero() {
             loop
             muted
             playsInline
-            className="h-full w-full object-cover grayscale-[0.2]"
+            style={{ opacity: videoOpacity }}
+            className="h-full w-full object-cover grayscale-[0.2] transition-opacity duration-300 ease-in-out"
           >
             <source src="/hero.mp4" type="video/mp4" />
           </video>
