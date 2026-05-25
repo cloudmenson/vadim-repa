@@ -98,9 +98,9 @@ export function Footer() {
           <div className="flex flex-col md:flex-row items-center gap-8 text-xs font-bold uppercase tracking-widest text-neutral-500">
             <p>© 2026 Logistics Pro Inc.</p>
             <div className="flex gap-8">
-              <Link href="#" className="hover:text-white transition-colors">Privacy</Link>
-              <Link href="#" className="hover:text-white transition-colors">Terms</Link>
-              <Link href="#" className="hover:text-white transition-colors">Cookies</Link>
+              <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+              <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
+              <Link href="/cookies" className="hover:text-white transition-colors">Cookies</Link>
             </div>
           </div>
         </div>

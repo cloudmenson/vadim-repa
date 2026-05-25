@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { CookieBanner } from "@/components/ui/CookieBanner";
 
 const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
@@ -65,6 +66,7 @@ export default function RootLayout({
         )}
       >
         <ScrollProgress />
+        <CookieBanner />
         {children}
       </body>
     </html>
