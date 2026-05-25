@@ -2,11 +2,20 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { QuoteModal } from "@/components/ui/QuoteModal";
 
 export function Hero() {
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch((error) => {
+        console.error("Autoplay failed:", error);
+      });
+    }
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -34,17 +43,14 @@ export function Hero() {
         {/* Background Video */}
         <div className="absolute inset-0 z-0 scale-105">
           <video
+            ref={videoRef}
             autoPlay
             loop
             muted
             playsInline
             className="h-full w-full object-cover grayscale-[0.2]"
-            poster="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80"
           >
-            <source
-              src="https://assets.mixkit.co/videos/preview/mixkit-cargo-ship-sailing-in-the-ocean-40615-large.mp4"
-              type="video/mp4"
-            />
+            <source src="/hero.mp4" type="video/mp4" />
           </video>
           {/* Advanced Overlay for 2026 aesthetic */}
           <div className="absolute inset-0 bg-neutral-950/40" />
