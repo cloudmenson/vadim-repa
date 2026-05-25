@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
+import Image from "next/image";
 
 const features = [
   "Advanced AI Route Optimization",
@@ -23,10 +24,11 @@ export function About() {
             className="relative"
           >
             <div className="relative z-10 rounded-3xl overflow-hidden aspect-[4/5] lg:aspect-square">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80"
                 alt="Logistics Operations"
-                className="w-full h-full object-cover grayscale-[0.5] hover:grayscale-0 transition-all duration-700"
+                fill
+                className="object-cover grayscale-[0.5] hover:grayscale-0 transition-all duration-700"
               />
             </div>
             {/* Decorative element */}

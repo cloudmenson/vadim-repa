@@ -93,7 +93,7 @@ export function Footer() {
 
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
           <p className="text-sm text-neutral-500 font-medium italic">
-            "Delivering the future, today."
+            &quot;Delivering the future, today.&quot;
           </p>
           <div className="flex flex-col md:flex-row items-center gap-8 text-xs font-bold uppercase tracking-widest text-neutral-500">
             <p>© 2026 Logistics Pro Inc.</p>

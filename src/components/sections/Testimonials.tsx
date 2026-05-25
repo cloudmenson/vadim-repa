@@ -59,7 +59,7 @@ export function Testimonials() {
             >
               <Quote className="h-10 w-10 text-blue-500/20 absolute top-8 right-8" />
               <p className="text-xl font-medium text-neutral-200 leading-relaxed mb-10 italic">
-                "{item.text}"
+                &quot;{item.text}&quot;
               </p>
               <div>
                 <p className="text-white font-black uppercase tracking-wider">{item.author}</p>
