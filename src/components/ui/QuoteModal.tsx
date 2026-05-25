@@ -62,7 +62,12 @@ export function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
     // Reset after success
     setTimeout(() => {
       setIsSuccess(false);
-      setFormData({ name: "", email: "", service: "Road Freight", message: "" });
+      setFormData({
+        name: "",
+        email: "",
+        service: "Road Freight",
+        message: "",
+      });
       onClose();
     }, 3000);
   };
@@ -97,15 +102,23 @@ export function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                   <div className="h-20 w-20 rounded-full bg-blue-600/20 flex items-center justify-center mb-6">
                     <CheckCircle2 className="h-10 w-10 text-blue-500" />
                   </div>
-                  <h3 className="text-3xl font-black text-white uppercase tracking-tighter mb-2">Success!</h3>
-                  <p className="text-neutral-400">Your request has been sent. We'll be in touch shortly.</p>
+                  <h3 className="text-3xl font-black text-white uppercase tracking-tighter mb-2">
+                    Success!
+                  </h3>
+                  <p className="text-neutral-400">
+                    Your request has been sent. We&apos;ll be in touch shortly.
+                  </p>
                 </motion.div>
               ) : (
                 <motion.div key="form" exit={{ opacity: 0, y: -10 }}>
                   <div className="flex items-center justify-between mb-8">
                     <div>
-                      <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Get a Freight Quote</h3>
-                      <p className="text-xs font-bold text-blue-500 uppercase tracking-widest mt-1">Response within 2 hours</p>
+                      <h3 className="text-2xl font-black text-white uppercase tracking-tighter">
+                        Get a Freight Quote
+                      </h3>
+                      <p className="text-xs font-bold text-blue-500 uppercase tracking-widest mt-1">
+                        Response within 2 hours
+                      </p>
                     </div>
                     <button
                       onClick={onClose}
@@ -118,40 +131,64 @@ export function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                   <form className="space-y-5" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-1.5">
-                        <label className="text-[10px] font-black text-neutral-500 uppercase tracking-[0.2em]">Name</label>
+                        <label className="text-[10px] font-black text-neutral-500 uppercase tracking-[0.2em]">
+                          Name
+                        </label>
                         <input
                           type="text"
                           value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          onChange={(e) =>
+                            setFormData({ ...formData, name: e.target.value })
+                          }
                           placeholder="John Doe"
                           className={cn(
                             "w-full rounded-xl border bg-neutral-800 px-4 py-3 text-sm outline-none transition-all focus:ring-2 focus:ring-blue-500/20",
-                            errors.name ? "border-red-500/50" : "border-white/5 focus:border-blue-500/50"
+                            errors.name
+                              ? "border-red-500/50"
+                              : "border-white/5 focus:border-blue-500/50",
                           )}
                         />
-                        {errors.name && <p className="text-[10px] font-bold text-red-500 uppercase">{errors.name}</p>}
+                        {errors.name && (
+                          <p className="text-[10px] font-bold text-red-500 uppercase">
+                            {errors.name}
+                          </p>
+                        )}
                       </div>
                       <div className="space-y-1.5">
-                        <label className="text-[10px] font-black text-neutral-500 uppercase tracking-[0.2em]">Email</label>
+                        <label className="text-[10px] font-black text-neutral-500 uppercase tracking-[0.2em]">
+                          Email
+                        </label>
                         <input
                           type="email"
                           value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          onChange={(e) =>
+                            setFormData({ ...formData, email: e.target.value })
+                          }
                           placeholder="john@example.com"
                           className={cn(
                             "w-full rounded-xl border bg-neutral-800 px-4 py-3 text-sm outline-none transition-all focus:ring-2 focus:ring-blue-500/20",
-                            errors.email ? "border-red-500/50" : "border-white/5 focus:border-blue-500/50"
+                            errors.email
+                              ? "border-red-500/50"
+                              : "border-white/5 focus:border-blue-500/50",
                           )}
                         />
-                        {errors.email && <p className="text-[10px] font-bold text-red-500 uppercase">{errors.email}</p>}
+                        {errors.email && (
+                          <p className="text-[10px] font-bold text-red-500 uppercase">
+                            {errors.email}
+                          </p>
+                        )}
                       </div>
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-[10px] font-black text-neutral-500 uppercase tracking-[0.2em]">Service Type</label>
+                      <label className="text-[10px] font-black text-neutral-500 uppercase tracking-[0.2em]">
+                        Service Type
+                      </label>
                       <select
                         value={formData.service}
-                        onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, service: e.target.value })
+                        }
                         className="w-full appearance-none rounded-xl border border-white/5 bg-neutral-800 px-4 py-3 text-sm outline-none focus:border-blue-500/50 transition-all cursor-pointer focus:ring-2 focus:ring-blue-500/20"
                       >
                         <option>Road Freight</option>
@@ -162,18 +199,28 @@ export function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-[10px] font-black text-neutral-500 uppercase tracking-[0.2em]">Message</label>
+                      <label className="text-[10px] font-black text-neutral-500 uppercase tracking-[0.2em]">
+                        Message
+                      </label>
                       <textarea
                         rows={4}
                         value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, message: e.target.value })
+                        }
                         placeholder="Tell us about your requirements..."
                         className={cn(
                           "w-full rounded-xl border bg-neutral-800 px-4 py-3 text-sm outline-none transition-all focus:ring-2 focus:ring-blue-500/20 resize-none",
-                          errors.message ? "border-red-500/50" : "border-white/5 focus:border-blue-500/50"
+                          errors.message
+                            ? "border-red-500/50"
+                            : "border-white/5 focus:border-blue-500/50",
                         )}
                       />
-                      {errors.message && <p className="text-[10px] font-bold text-red-500 uppercase">{errors.message}</p>}
+                      {errors.message && (
+                        <p className="text-[10px] font-bold text-red-500 uppercase">
+                          {errors.message}
+                        </p>
+                      )}
                     </div>
 
                     <button
@@ -181,7 +228,9 @@ export function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                       disabled={isSubmitting}
                       className="w-full flex items-center justify-center gap-2 rounded-xl bg-blue-600 py-4 font-black text-white hover:bg-blue-500 transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-widest text-sm"
                     >
-                      {isSubmitting ? "Sending..." : (
+                      {isSubmitting ? (
+                        "Sending..."
+                      ) : (
                         <>
                           Send Request <Send className="h-4 w-4" />
                         </>
