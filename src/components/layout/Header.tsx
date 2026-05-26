@@ -77,7 +77,7 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
                 src="/logo.svg"
                 alt="VVA-logistic Logo"
                 className={cn(
-                  "h-20 w-auto transition-all duration-300",
+                  "h-25 w-auto transition-all duration-300",
                   isHeaderWhite ? "brightness-100" : "brightness-0 invert",
                 )}
               />

@@ -26,7 +26,7 @@ export function Footer({ dict }: { dict: Dictionary["footer"] }) {
               <img
                 src="/logo.svg"
                 alt="VVA-logistic Logo"
-                className="h-20 w-auto brightness-0 invert"
+                className="h-25 w-auto brightness-0 invert"
               />
             </Link>
             <p className="text-white/60 text-sm leading-relaxed max-w-xs font-medium">
