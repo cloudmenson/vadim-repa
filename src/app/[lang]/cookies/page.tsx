@@ -31,7 +31,7 @@ export default async function CookiesPage({
         </section>
         <p className="text-sm italic">Last updated: May 26, 2026</p>
       </LegalLayout>
-      <Footer />
+      <Footer dict={dict.footer} />
     </>
   );
 }

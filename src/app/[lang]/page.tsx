@@ -40,13 +40,13 @@ export default async function Home({
       <Header lang={lang} dict={dict.header} />
       <main>
         <Hero dict={dict.hero} />
-        <WhyUs />
+        <WhyUs dict={dict.whyUs} />
         <Services dict={dict.services} />
-        <Process />
-        <Trust />
-        <CTA />
+        <Process dict={dict.process} />
+        <Trust dict={dict.trust} />
+        <CTA dict={dict.cta} />
       </main>
-      <Footer />
+      <Footer dict={dict.footer} />
     </>
   );
 }

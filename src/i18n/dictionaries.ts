@@ -25,7 +25,16 @@ export type Dictionary = {
       type: string;
       button: string;
       privacy: string;
+      required: string;
+      invalid_phone: string;
+      success: string;
+      success_desc: string;
+      submitting: string;
     };
+  };
+  whyUs: {
+    title: string;
+    items: { title: string; desc: string }[];
   };
   services: {
     title: string;
@@ -36,6 +45,29 @@ export type Dictionary = {
       special: { title: string; desc: string };
       support: { title: string; desc: string };
     };
+  };
+  process: {
+    title: string;
+    button: string;
+    steps: { title: string; desc: string }[];
+  };
+  trust: {
+    title: string;
+    desc: string;
+    experience: string;
+    stats: { label: string }[];
+  };
+  cta: {
+    title: string;
+    desc: string;
+    button: string;
+  };
+  footer: {
+    desc: string;
+    nav: string;
+    services: string;
+    contacts: string;
+    city: string;
   };
 };
 

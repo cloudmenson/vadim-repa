@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { Mail, Phone, MapPin, Globe, Share2, MessageCircle } from "lucide-react";
+import { Dictionary } from "@/i18n/dictionaries";
 
-export function Footer() {
+export function Footer({ dict }: { dict: Dictionary["footer"] }) {
   return (
     <footer id="contact" className="bg-[#001a33] text-white py-20 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
@@ -18,7 +19,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-white/60 text-sm leading-relaxed max-w-xs font-medium">
-              Міжнародні вантажоперевезення по Європі та Україні. Надійність, безпека та професіоналізм у кожній доставці.
+              {dict.desc}
             </p>
             <div className="flex gap-4">
               <a href="#" className="p-2 bg-white/5 hover:bg-brand-light-blue transition-colors rounded-full">
@@ -35,7 +36,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-black uppercase tracking-widest mb-8">Навігація</h4>
+            <h4 className="text-lg font-black uppercase tracking-widest mb-8">{dict.nav}</h4>
             <ul className="space-y-4 text-white/60 font-medium">
               <li><Link href="#hero" className="hover:text-white transition-colors">Головна</Link></li>
               <li><Link href="#services" className="hover:text-white transition-colors">Послуги</Link></li>
@@ -47,7 +48,7 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-lg font-black uppercase tracking-widest mb-8">Послуги</h4>
+            <h4 className="text-lg font-black uppercase tracking-widest mb-8">{dict.services}</h4>
             <ul className="space-y-4 text-white/60 font-medium">
               <li>Міжнародні перевезення</li>
               <li>Збірні вантажі</li>
@@ -58,7 +59,7 @@ export function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-lg font-black uppercase tracking-widest mb-8">Контакти</h4>
+            <h4 className="text-lg font-black uppercase tracking-widest mb-8">{dict.contacts}</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Phone className="h-5 w-5 text-brand-light-blue shrink-0" />
@@ -73,7 +74,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-brand-light-blue shrink-0" />
-                <span className="text-white/60 text-sm font-medium">Україна, м. Київ</span>
+                <span className="text-white/60 text-sm font-medium">{dict.city}</span>
               </li>
             </ul>
           </div>

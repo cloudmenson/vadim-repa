@@ -22,8 +22,24 @@
       "route": "From / To",
       "type": "Cargo Type",
       "button": "Get Calculation",
-      "privacy": "By clicking the button, you agree to the privacy policy"
+      "privacy": "By clicking the button, you agree to the privacy policy",
+      "required": "Required field",
+      "invalid_phone": "Invalid format",
+      "success": "Thank you!",
+      "success_desc": "We will contact you shortly.",
+      "submitting": "Sending..."
     }
+  },
+  "whyUs": {
+    "title": "Why clients choose VVA-logistic",
+    "items": [
+      { "title": "2000+ verified cars", "desc": "Transport for any type of cargo" },
+      { "title": "Fast delivery", "desc": "Optimized routes without delays" },
+      { "title": "Full support", "desc": "Documents, customs, delivery control" },
+      { "title": "Safe transportation", "desc": "Insurance and cargo control" },
+      { "title": "Personal manager", "desc": "Client support 24/7" },
+      { "title": "Favorable rates", "desc": "Transparent prices without hidden fees" }
+    ]
   },
   "services": {
     "title": "Our Services",
@@ -49,5 +65,37 @@
         "desc": "Insurance and cargo support."
       }
     }
+  },
+  "process": {
+    "title": "How we work",
+    "button": "Get Consultation",
+    "steps": [
+      { "title": "You leave a request", "desc": "Call us or fill out the form on the site to get a consultation." },
+      { "title": "We calculate route and cost", "desc": "We select the optimal transport and calculate the most favorable rate." },
+      { "title": "We process documents", "desc": "We prepare a full package of documents for safe and legal transportation." },
+      { "title": "We deliver the cargo on time", "desc": "We deliver and provide a full report on the location of the cargo." }
+    ]
+  },
+  "trust": {
+    "title": "Businesses all over Europe trust us",
+    "desc": "We build long-term partnerships and guarantee high-quality service for each client. VVA-logistic is a team of professionals who know everything about international logistics and customs clearance.",
+    "experience": "years of experience",
+    "stats": [
+      { "label": "deliveries" },
+      { "label": "clients" },
+      { "label": "European countries" }
+    ]
+  },
+  "cta": {
+    "title": "Need international transportation?",
+    "desc": "Get a cost calculation today and see our advantages",
+    "button": "Leave a Request"
+  },
+  "footer": {
+    "desc": "International cargo transportation in Europe and Ukraine. Reliability, safety and professionalism in every delivery.",
+    "nav": "Navigation",
+    "services": "Services",
+    "contacts": "Contacts",
+    "city": "Kyiv, Ukraine"
   }
 }
