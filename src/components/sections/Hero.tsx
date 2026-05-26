@@ -14,8 +14,10 @@ export function Hero({ dict }: { dict: Dictionary["hero"] }) {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    route: "",
+    from: "",
+    to: "",
     type: "",
+    info: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -47,17 +49,18 @@ export function Hero({ dict }: { dict: Dictionary["hero"] }) {
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
-    if (!formData.name.trim()) newErrors.name = "Обов'язкове поле";
+    if (!formData.name.trim()) newErrors.name = dict.form.required;
     
     const phoneClean = formData.phone.replace(/\D/g, "");
     if (!formData.phone.trim()) {
-      newErrors.phone = "Обов'язкове поле";
+      newErrors.phone = dict.form.required;
     } else if (phoneClean.length < 9) {
-      newErrors.phone = "Невірний формат";
+      newErrors.phone = dict.form.invalid_phone;
     }
 
-    if (!formData.route.trim()) newErrors.route = "Обов'язкове поле";
-    if (!formData.type.trim()) newErrors.type = "Обов'язкове поле";
+    if (!formData.from.trim()) newErrors.from = dict.form.required;
+    if (!formData.to.trim()) newErrors.to = dict.form.required;
+    if (!formData.type.trim()) newErrors.type = dict.form.required;
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -72,7 +75,7 @@ export function Hero({ dict }: { dict: Dictionary["hero"] }) {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     setIsSubmitting(false);
     setIsSuccess(true);
-    setFormData({ name: "", phone: "", route: "", type: "" });
+    setFormData({ name: "", phone: "", from: "", to: "", type: "", info: "" });
     setTimeout(() => setIsSuccess(false), 5000);
   };
 
@@ -183,14 +186,14 @@ export function Hero({ dict }: { dict: Dictionary["hero"] }) {
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-600 mb-6">
                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
                   </div>
-                  <h3 className="text-2xl font-black text-[#003366] uppercase mb-2">Дякуємо!</h3>
-                  <p className="text-neutral-500 font-medium">Ми зв&apos;яжемося з вами найближчим часом.</p>
+                  <h3 className="text-2xl font-black text-[#003366] uppercase mb-2">{dict.form.success}</h3>
+                  <p className="text-neutral-500 font-medium">{dict.form.success_desc}</p>
                 </div>
               ) : (
                 <>
                   <h3 className="text-xl sm:text-2xl font-black text-[#003366] mb-6 sm:mb-8 uppercase tracking-tight">{dict.form.title}</h3>
-                  <form className="space-y-6 sm:space-y-8" onSubmit={handleSubmit}>
-                    <div className="grid sm:grid-cols-2 gap-x-4 gap-y-6 sm:gap-y-8">
+                  <form className="space-y-6" onSubmit={handleSubmit}>
+                    <div className="grid sm:grid-cols-2 gap-x-4 gap-y-6">
                       <div className="relative">
                         <input 
                           type="text" 
@@ -212,17 +215,31 @@ export function Hero({ dict }: { dict: Dictionary["hero"] }) {
                         {errors.phone && <p className="absolute -bottom-5 left-0 text-[10px] text-red-500 font-bold uppercase whitespace-nowrap">{errors.phone}</p>}
                       </div>
                     </div>
-                    <div className="grid sm:grid-cols-2 gap-x-4 gap-y-6 sm:gap-y-8">
+
+                    <div className="grid sm:grid-cols-2 gap-x-4 gap-y-6">
                       <div className="relative">
                         <input 
                           type="text" 
-                          placeholder={dict.form.route} 
-                          value={formData.route}
-                          onChange={(e) => setFormData({ ...formData, route: e.target.value })}
-                          className={`w-full px-4 py-2.5 sm:py-3 bg-neutral-50 border ${errors.route ? 'border-red-500' : 'border-neutral-100'} focus:border-[#0066cc] outline-none transition-all text-neutral-900 placeholder:text-neutral-400 text-sm sm:text-base font-medium`}
+                          placeholder={dict.form.from} 
+                          value={formData.from}
+                          onChange={(e) => setFormData({ ...formData, from: e.target.value })}
+                          className={`w-full px-4 py-2.5 sm:py-3 bg-neutral-50 border ${errors.from ? 'border-red-500' : 'border-neutral-100'} focus:border-[#0066cc] outline-none transition-all text-neutral-900 placeholder:text-neutral-400 text-sm sm:text-base font-medium`}
                         />
-                        {errors.route && <p className="absolute -bottom-5 left-0 text-[10px] text-red-500 font-bold uppercase whitespace-nowrap">{errors.route}</p>}
+                        {errors.from && <p className="absolute -bottom-5 left-0 text-[10px] text-red-500 font-bold uppercase whitespace-nowrap">{errors.from}</p>}
                       </div>
+                      <div className="relative">
+                        <input 
+                          type="text" 
+                          placeholder={dict.form.to} 
+                          value={formData.to}
+                          onChange={(e) => setFormData({ ...formData, to: e.target.value })}
+                          className={`w-full px-4 py-2.5 sm:py-3 bg-neutral-50 border ${errors.to ? 'border-red-500' : 'border-neutral-100'} focus:border-[#0066cc] outline-none transition-all text-neutral-900 placeholder:text-neutral-400 text-sm sm:text-base font-medium`}
+                        />
+                        {errors.to && <p className="absolute -bottom-5 left-0 text-[10px] text-red-500 font-bold uppercase whitespace-nowrap">{errors.to}</p>}
+                      </div>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-x-4 gap-y-6">
                       <div className="relative">
                         <input 
                           type="text" 
@@ -233,19 +250,27 @@ export function Hero({ dict }: { dict: Dictionary["hero"] }) {
                         />
                         {errors.type && <p className="absolute -bottom-5 left-0 text-[10px] text-red-500 font-bold uppercase whitespace-nowrap">{errors.type}</p>}
                       </div>
+                      <div className="relative">
+                        <input 
+                          type="text" 
+                          placeholder={dict.form.info} 
+                          value={formData.info}
+                          onChange={(e) => setFormData({ ...formData, info: e.target.value })}
+                          className="w-full px-4 py-2.5 sm:py-3 bg-neutral-50 border border-neutral-100 focus:border-[#0066cc] outline-none transition-all text-neutral-900 placeholder:text-neutral-400 text-sm sm:text-base font-medium"
+                        />
+                      </div>
                     </div>
-                    <div>
-                      <button 
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="w-full bg-[#003366] hover:bg-[#002244] text-white font-black py-3.5 sm:py-4 uppercase tracking-[0.1em] text-sm sm:text-base transition-all active:scale-[0.98] shadow-xl disabled:opacity-50"
-                      >
-                        {isSubmitting ? 'Надсилаємо...' : dict.form.button}
-                      </button>
-                      <p className="text-[8px] sm:text-[9px] text-neutral-400 text-center uppercase tracking-widest mt-4 sm:mt-6">
-                        {dict.form.privacy}
-                      </p>
-                    </div>
+
+                    <button 
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-[#003366] hover:bg-[#002244] text-white font-black py-3.5 sm:py-4 uppercase tracking-[0.1em] text-sm sm:text-base transition-all active:scale-[0.98] shadow-xl disabled:opacity-50"
+                    >
+                      {isSubmitting ? dict.form.submitting : dict.form.button}
+                    </button>
+                    <p className="text-[8px] sm:text-[9px] text-neutral-400 text-center uppercase tracking-widest mt-4 sm:mt-6">
+                      {dict.form.privacy}
+                    </p>
                   </form>
                 </>
               )}
@@ -254,7 +279,7 @@ export function Hero({ dict }: { dict: Dictionary["hero"] }) {
         </div>
       </section>
 
-      <QuoteModal isOpen={isQuoteOpen} onClose={() => setIsQuoteOpen(false)} />
+      <QuoteModal isOpen={isQuoteOpen} onClose={() => setIsQuoteOpen(false)} dict={dict.form} />
     </>
   );
 }

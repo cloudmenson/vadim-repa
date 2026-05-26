@@ -21,8 +21,10 @@ export type Dictionary = {
       title: string;
       name: string;
       phone: string;
-      route: string;
+      from: string;
+      to: string;
       type: string;
+      info: string;
       button: string;
       privacy: string;
       required: string;

@@ -12,7 +12,7 @@ export function LanguageSwitcher({ currentLang, isScrolled }: { currentLang: str
     const segments = pathname.split('/');
     segments[1] = lang;
     const newPath = segments.join('/');
-    router.push(newPath);
+    router.push(newPath, { scroll: false });
   };
 
   return (

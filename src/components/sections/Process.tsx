@@ -6,7 +6,7 @@ import { useState } from "react";
 import { QuoteModal } from "@/components/ui/QuoteModal";
 import { Dictionary } from "@/i18n/dictionaries";
 
-export function Process({ dict }: { dict: Dictionary["process"] }) {
+export function Process({ dict, formDict }: { dict: Dictionary["process"]; formDict: Dictionary["hero"]["form"] }) {
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
 
   return (
@@ -63,7 +63,7 @@ export function Process({ dict }: { dict: Dictionary["process"] }) {
         </div>
       </section>
 
-      <QuoteModal isOpen={isQuoteOpen} onClose={() => setIsQuoteOpen(false)} />
+      <QuoteModal isOpen={isQuoteOpen} onClose={() => setIsQuoteOpen(false)} dict={formDict} />
     </>
   );
 }

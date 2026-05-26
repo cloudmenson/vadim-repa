@@ -1,11 +1,9 @@
-import { Header } from "@/components/layout/Header";
 import { Hero } from "@/components/sections/Hero";
 import { WhyUs } from "@/components/sections/WhyUs";
 import { Services } from "@/components/sections/Services";
 import { Process } from "@/components/sections/Process";
 import { Trust } from "@/components/sections/Trust";
 import { CTA } from "@/components/sections/CTA";
-import { Footer } from "@/components/layout/Footer";
 import { getDictionary } from "@/i18n/dictionaries";
 
 export default async function Home({
@@ -37,16 +35,14 @@ export default async function Home({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Header lang={lang} dict={dict.header} />
       <main>
         <Hero dict={dict.hero} />
         <WhyUs dict={dict.whyUs} />
         <Services dict={dict.services} />
-        <Process dict={dict.process} />
+        <Process dict={dict.process} formDict={dict.hero.form} />
         <Trust dict={dict.trust} />
         <CTA dict={dict.cta} />
       </main>
-      <Footer dict={dict.footer} />
     </>
   );
 }
