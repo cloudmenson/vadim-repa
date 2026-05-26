@@ -26,7 +26,7 @@ export function CTA({ dict }: { dict: Dictionary["cta"] }) {
           </p>
           <button 
             onClick={(e) => handleSmoothScroll(e, "#hero")}
-            className="w-full sm:w-auto bg-white hover:bg-neutral-100 text-brand-blue font-black px-8 lg:px-12 py-5 lg:py-6 text-lg lg:text-xl uppercase tracking-widest transition-all shadow-2xl active:scale-95"
+            className="w-full sm:w-auto bg-white hover:bg-neutral-100 text-brand-blue font-black px-8 lg:px-12 py-5 lg:py-6 text-lg lg:text-xl uppercase tracking-widest transition-all shadow-2xl active:scale-95 cursor-pointer"
           >
             {dict.button}
           </button>

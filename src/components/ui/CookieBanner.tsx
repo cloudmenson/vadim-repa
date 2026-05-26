@@ -28,7 +28,7 @@ export function CookieBanner() {
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 50, scale: 0.9 }}
-          className="fixed bottom-6 left-6 right-6 z-[100] md:left-auto md:right-8 md:max-w-md"
+          className="fixed bottom-6 left-6 right-6 z-100 md:left-auto md:right-8 md:max-w-md"
         >
           <div className="bg-neutral-900 border border-white/10 rounded-2xl p-6 shadow-2xl backdrop-blur-xl">
             <div className="flex items-start gap-4 mb-4">
@@ -42,7 +42,7 @@ export function CookieBanner() {
                   <Link href="/cookies" className="text-blue-500 hover:underline ml-1">Cookie Policy</Link>.
                 </p>
               </div>
-              <button onClick={() => setIsVisible(false)} className="text-neutral-500 hover:text-white transition-colors">
+              <button onClick={() => setIsVisible(false)} className="text-neutral-500 hover:text-white transition-colors cursor-pointer">
                 <X className="h-4 w-4" />
               </button>
             </div>

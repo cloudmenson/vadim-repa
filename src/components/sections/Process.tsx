@@ -30,7 +30,7 @@ export function Process({ dict, formDict }: { dict: Dictionary["process"]; formD
                   transition={{ delay: idx * 0.1 }}
                   className="flex flex-col items-center text-center group"
                 >
-                  <div className="text-6xl sm:text-7xl font-black text-white/10 group-hover:text-brand-light-blue/20 transition-colors duration-500 mb-[-30px] sm:mb-[-40px] z-0 select-none">
+                  <div className="text-6xl sm:text-7xl font-black text-white/10 group-hover:text-brand-light-blue/20 transition-colors duration-500 -mb-7.5 sm:-mb-10 z-0 select-none">
                     0{idx + 1}
                   </div>
                   <div className="relative z-10 px-4">
