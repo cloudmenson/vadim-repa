@@ -27,6 +27,15 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* cursor: pointer on every interactive element.
+   * Browsers default <button> to cursor:default — this normalises across all. */
+  button,
+  [role="button"],
+  select,
+  label[for] {
+    cursor: pointer;
+  }
+
   /* Prevent iOS tap flash on interactive elements */
   a,
   button,

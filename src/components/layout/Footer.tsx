@@ -49,17 +49,15 @@ export function Footer({ dict }: { dict: Dictionary["footer"] }) {
           <div className="space-y-5 sm:col-span-2 lg:col-span-1">
             <Link
               href={`/${lang}`}
-              className="inline-flex items-center gap-3 group"
+              className="inline-flex cursor-pointer"
+              aria-label="VVA-logistic — на головну"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/logo.svg"
                 alt="VVA-logistic Logo"
-                className="h-9 w-auto brightness-0 invert"
+                className="h-14 sm:h-16 w-auto brightness-0 invert"
               />
-              <span className="text-xl font-black tracking-tight">
-                VVA-logistic
-              </span>
             </Link>
             <p className="text-white/55 text-sm leading-relaxed max-w-xs font-medium">
               {dict.desc}
