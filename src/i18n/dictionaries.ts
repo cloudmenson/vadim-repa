@@ -42,9 +42,10 @@ export type Dictionary = {
     title: string;
     items: {
       intl: { title: string; desc: string };
+      groupage: { title: string; desc: string };
       imp_exp: { title: string; desc: string };
       customs: { title: string; desc: string };
-      special: { title: string; desc: string };
+      adr: { title: string; desc: string };
       support: { title: string; desc: string };
     };
   };

@@ -105,16 +105,15 @@ export function Footer({ dict }: { dict: Dictionary["footer"] }) {
 
           {/* Services */}
           <div>
-            <h4 className="text-lg font-black uppercase tracking-widest mb-8">
-              {dict.services}
-            </h4>
+            <h4 className="text-lg font-black uppercase tracking-widest mb-8">{dict.services}</h4>
             <ul className="space-y-4 text-white/60 font-medium">
-              <li>Міжнародні перевезення</li>
-              <li>Збірні вантажі</li>
-              <li>Митні документи</li>
-              <li>ADR вантажі</li>
+              <li><Link href="#services" className="hover:text-white transition-colors cursor-pointer">Міжнародні перевезення</Link></li>
+              <li><Link href="#services" className="hover:text-white transition-colors cursor-pointer">Збірні вантажі</Link></li>
+              <li><Link href="#services" className="hover:text-white transition-colors cursor-pointer">Митні документи</Link></li>
+              <li><Link href="#services" className="hover:text-white transition-colors cursor-pointer">ADR вантажі</Link></li>
             </ul>
           </div>
+
 
           {/* Contact Info */}
           <div>

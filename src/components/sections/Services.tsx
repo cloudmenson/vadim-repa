@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Globe, Truck, FileText, Shield, AlertTriangle } from "lucide-react";
+import { Globe, Truck, FileCheck, Shield, AlertTriangle, Package } from "lucide-react";
 import { Dictionary } from "@/i18n/dictionaries";
 
 export function Services({ dict }: { dict: Dictionary["services"] }) {
@@ -12,19 +12,24 @@ export function Services({ dict }: { dict: Dictionary["services"] }) {
       description: dict.items.intl.desc,
     },
     {
+      icon: Package,
+      title: dict.items.groupage.title,
+      description: dict.items.groupage.desc,
+    },
+    {
       icon: Globe,
       title: dict.items.imp_exp.title,
       description: dict.items.imp_exp.desc,
     },
     {
-      icon: FileText,
+      icon: FileCheck,
       title: dict.items.customs.title,
       description: dict.items.customs.desc,
     },
     {
       icon: AlertTriangle,
-      title: dict.items.special.title,
-      description: dict.items.special.desc,
+      title: dict.items.adr.title,
+      description: dict.items.adr.desc,
     },
     {
       icon: Shield,
@@ -47,20 +52,20 @@ export function Services({ dict }: { dict: Dictionary["services"] }) {
           <div className="h-1.5 w-20 sm:w-24 bg-brand-light-blue mx-auto" />
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {services.map((service, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.05 }}
               className="group p-6 sm:p-8 bg-white border border-neutral-100 hover:bg-brand-blue transition-all duration-500 shadow-sm hover:shadow-2xl hover:shadow-brand-blue/20 cursor-default h-full flex flex-col"
             >
-              <div className="mb-5 sm:mb-6 text-brand-light-blue group-hover:text-white transition-colors duration-500">
+              <div className="mb-6 text-brand-light-blue group-hover:text-white transition-colors duration-500">
                 <service.icon className="h-10 w-10 sm:h-12 sm:w-12" />
               </div>
-              <h3 className="text-lg sm:text-xl font-black text-brand-blue group-hover:text-white mb-3 sm:mb-4 uppercase tracking-tight transition-colors duration-500">
+              <h3 className="text-lg sm:text-xl font-black text-brand-blue group-hover:text-white mb-4 uppercase tracking-tight transition-colors duration-500">
                 {service.title}
               </h3>
               <p className="text-sm sm:text-base text-neutral-600 group-hover:text-white/80 leading-relaxed transition-colors duration-500 font-medium">

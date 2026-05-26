@@ -48,23 +48,27 @@
     "items": {
       "intl": {
         "title": "International Transport",
-        "desc": "International road transport of full and groupage cargo;"
+        "desc": "Reliable road transport of full truckloads throughout Europe and Ukraine."
+      },
+      "groupage": {
+        "title": "Groupage Cargo",
+        "desc": "We deliver groupage cargo for clients who do not need a separate vehicle. We combine several shipments in one vehicle, which significantly reduces costs."
       },
       "imp_exp": {
         "title": "Import / Export",
-        "desc": "Transportation of goods in import and export connections;"
+        "desc": "Comprehensive support and organization of transportation in import and export connections."
       },
       "customs": {
-        "title": "Customs Clearance",
-        "desc": "Execution of customs and transport documentation, translation of documents into Ukrainian, execution of permitting documentation;"
+        "title": "Customs Documents",
+        "desc": "We provide assistance in preparing and processing customs documents. We advise on necessary certificates and declarations for fast clearance."
       },
-      "special": {
-        "title": "Special Cargo",
-        "desc": "Transportation of oversized and dangerous goods, including under temperature conditions;"
+      "adr": {
+        "title": "ADR Cargo",
+        "desc": "We transport ADR cargo in accordance with international standards. We organize the transportation of hazardous substances in compliance with all rules."
       },
       "support": {
-        "title": "Support",
-        "desc": "Insurance and cargo support."
+        "title": "Support and Insurance",
+        "desc": "Full financial protection and professional support of your cargo throughout the entire journey."
       }
     }
   },
