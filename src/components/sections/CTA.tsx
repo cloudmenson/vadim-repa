@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Dictionary } from "@/i18n/dictionaries";
+import { handleSmoothScroll } from "@/lib/utils/scroll";
 
 export function CTA({ dict }: { dict: Dictionary["cta"] }) {
   return (
@@ -24,7 +25,7 @@ export function CTA({ dict }: { dict: Dictionary["cta"] }) {
             {dict.desc}
           </p>
           <button 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={(e) => handleSmoothScroll(e, "#hero")}
             className="w-full sm:w-auto bg-white hover:bg-neutral-100 text-brand-blue font-black px-8 lg:px-12 py-5 lg:py-6 text-lg lg:text-xl uppercase tracking-widest transition-all shadow-2xl active:scale-95"
           >
             {dict.button}

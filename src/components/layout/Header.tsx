@@ -10,6 +10,7 @@ import { QuoteModal } from "@/components/ui/QuoteModal";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import { Dictionary } from "@/i18n/dictionaries";
 import { useMenu } from "@/lib/context/MenuContext";
+import { handleSmoothScroll } from "@/lib/utils/scroll";
 
 export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,12 +22,12 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
   const isSubPage = pathname !== `/${lang}` && pathname !== `/${lang}/`;
 
   const navigation = [
-    { name: dict.header.nav.home, href: `/${lang}#hero` },
-    { name: dict.header.nav.services, href: `/${lang}#services` },
-    { name: dict.header.nav.about, href: `/${lang}#about` },
-    { name: dict.header.nav.advantages, href: `/${lang}#why-us` },
-    { name: dict.header.nav.process, href: `/${lang}#process` },
-    { name: dict.header.nav.contacts, href: `/${lang}#contact` },
+    { name: dict.header.nav.home, href: "#hero" },
+    { name: dict.header.nav.services, href: "#services" },
+    { name: dict.header.nav.about, href: "#about" },
+    { name: dict.header.nav.advantages, href: "#why-us" },
+    { name: dict.header.nav.process, href: "#process" },
+    { name: dict.header.nav.contacts, href: "#contact" },
   ];
 
   useEffect(() => {
@@ -48,9 +49,11 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
     };
   }, [mobileMenuOpen]);
 
-  // Handle anchor link clicks to close mobile menu
-  const handleLinkClick = () => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     setMobileMenuOpen(false);
+    if (href.startsWith("#") && !isSubPage) {
+      handleSmoothScroll(e, href);
+    }
   };
 
   const isHeaderWhite = isScrolled || mobileMenuOpen || isSubPage;
@@ -60,9 +63,9 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
       <header
         className={cn(
           "fixed top-0 z-50 w-full transition-all duration-300",
-          isHeaderWhite
-            ? "bg-white py-3 border-b border-black/5 shadow-sm"
-            : "bg-transparent py-4 lg:py-6",
+          isHeaderWhite 
+            ? "bg-white py-3 border-b border-black/5 shadow-sm" 
+            : "bg-transparent py-4 lg:py-6"
         )}
       >
         <nav className="container mx-auto flex items-center justify-between px-4 sm:px-6 relative z-[70]">
@@ -77,7 +80,7 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
                 src="/logo.svg"
                 alt="VVA-logistic Logo"
                 className={cn(
-                  "h-25 w-auto transition-all duration-300",
+                  "h-full w-auto transition-all duration-300",
                   isHeaderWhite ? "brightness-100" : "brightness-0 invert",
                 )}
               />
@@ -90,7 +93,8 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
               {navigation.map((item) => (
                 <Link
                   key={item.name}
-                  href={item.href}
+                  href={isSubPage ? `/${lang}${item.href}` : item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
                   className={cn(
                     "relative text-[13px] font-bold uppercase tracking-wider transition-colors group",
                     isHeaderWhite
@@ -135,14 +139,12 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
               href="tel:+380975299495"
               className={cn(
                 "p-2 rounded-full transition-colors",
-                isHeaderWhite
-                  ? "bg-brand-blue/5 text-brand-blue"
-                  : "bg-white/10 text-white",
+                isHeaderWhite ? "bg-brand-blue/5 text-brand-blue" : "bg-white/10 text-white"
               )}
             >
               <Phone className="h-5 w-5" />
             </a>
-
+            
             <button
               className={cn(
                 "relative p-2 -mr-2 cursor-pointer outline-none transition-colors",
@@ -180,9 +182,9 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
                       transition={{ delay: 0.05 * idx }}
                     >
                       <Link
-                        href={item.href}
+                        href={isSubPage ? `/${lang}${item.href}` : item.href}
+                        onClick={(e) => handleNavClick(e, item.href)}
                         className="block py-4 text-3xl sm:text-4xl font-black tracking-tight text-brand-blue active:text-brand-light-blue transition-colors border-b border-neutral-50"
-                        onClick={handleLinkClick}
                       >
                         {item.name}
                       </Link>
@@ -202,7 +204,7 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
                     </span>
                     <LanguageSwitcher currentLang={lang} isScrolled={true} />
                   </div>
-
+                  
                   <div className="flex flex-col gap-2">
                     <span className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400 px-1">
                       Зв&apos;язок з нами
@@ -237,11 +239,7 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
         </AnimatePresence>
       </header>
 
-      <QuoteModal
-        isOpen={isQuoteOpen}
-        onClose={() => setIsQuoteOpen(false)}
-        dict={dict.hero.form}
-      />
+      <QuoteModal isOpen={isQuoteOpen} onClose={() => setIsQuoteOpen(false)} dict={dict.hero.form} />
     </>
   );
 }
