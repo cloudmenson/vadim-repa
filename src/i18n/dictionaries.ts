@@ -11,6 +11,8 @@ export type Dictionary = {
       contacts: string;
     };
     calculate: string;
+    contact_label: string;
+    lang_label: string;
   };
   hero: {
     title: string;
@@ -68,9 +70,14 @@ export type Dictionary = {
   footer: {
     desc: string;
     nav: string;
+    nav_items: string[];
     services: string;
+    services_items: string[];
     contacts: string;
     city: string;
+    copyright: string;
+    terms: string;
+    privacy_policy: string;
   };
 };
 
@@ -79,5 +86,5 @@ const dictionaries = {
   uk: () => import('./uk.json').then((module) => module.default as Dictionary),
 };
 
-export const getDictionary = async (locale: 'en' | 'uk') => 
+export const getDictionary = async (locale: 'en' | 'uk') =>
   dictionaries[locale]();

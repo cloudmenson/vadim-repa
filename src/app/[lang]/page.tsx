@@ -21,7 +21,7 @@ export default async function Home({
     "image": "https://vva-logistic.com/og-image.jpg",
     "description": dict.hero.description,
     "url": "https://vva-logistic.com",
-    "telephone": "+380975299495",
+    "telephone": "+380967804247",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Kyiv",

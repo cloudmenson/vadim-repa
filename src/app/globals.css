@@ -16,15 +16,50 @@
 @layer base {
   * {
     @apply border-black/5;
+    box-sizing: border-box;
   }
+
   body {
     @apply bg-white text-brand-gray selection:bg-brand-blue/10 selection:text-brand-blue;
+    /* Font rendering across all browsers */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Prevent iOS tap flash on interactive elements */
+  a,
+  button,
+  [role="button"],
+  input,
+  label,
+  select,
+  textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevent double-tap zoom on buttons/links — keeps UI snappy on iOS */
+  button,
+  a {
+    touch-action: manipulation;
+  }
+
+  /*
+   * iOS Safari input zoom fix
+   * iOS auto-zooms when an input's font-size is < 16px.
+   * font-size: max(16px, 1rem) guarantees 16px minimum without
+   * overriding larger sizes set by Tailwind utilities.
+   */
+  input,
+  select,
+  textarea {
+    font-size: max(16px, 1rem);
   }
 }
 
-/* Custom Scrollbar */
+/* ── Custom Scrollbar (Chrome, Safari, Edge) ── */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -33,17 +68,132 @@
 
 ::-webkit-scrollbar-thumb {
   background: #003366;
-  border-radius: 5px;
-  border: 3px solid #f1f1f1;
+  border-radius: 4px;
+  border: 2px solid #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #0066cc;
 }
 
+/* ── Base HTML / Body ── */
 html,
 body {
   overscroll-behavior: none;
-  scroll-behavior: smooth;
   scrollbar-gutter: stable;
+}
+
+/*
+ * Smooth scroll with reduced-motion respect
+ * (Tailwind's scroll-smooth on <html> covers most cases,
+ *  but this ensures it's off for users who prefer less motion)
+ */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Modal height utilities (svh with vh fallback in one rule) ──
+ * Tailwind can't stack vh → svh on the same property across two classes;
+ * both values must live in a single rule block so browsers without svh
+ * support keep the vh fallback while modern browsers take svh.
+ */
+.modal-max-h {
+  max-height: 92vh;    /* fallback */
+  max-height: 92svh;   /* modern Chrome 108 / Safari 15.4 / FF 101 */
+}
+
+@media (min-width: 640px) {
+  .modal-max-h {
+    max-height: 90vh;
+    max-height: 90svh;
+  }
+}
+
+/* ── iOS / Safari Viewport Height Fix ──
+ * `100vh` on iOS Safari includes the browser chrome (address bar),
+ * causing sections to overflow. `100svh` (small viewport height) is
+ * the correct modern value; we fall back to `100vh` for older Safari.
+ */
+.min-h-screen {
+  min-height: 100vh;       /* fallback — all browsers */
+  min-height: 100svh;      /* modern — iOS 15.4+, Chrome 108+, FF 101+ */
+}
+
+/* ── Safe Area Utilities (notch / Dynamic Island) ── */
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.pl-safe {
+  padding-left: env(safe-area-inset-left, 0px);
+}
+
+.pr-safe {
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* ── iOS Scroll Lock for Modals ──
+ * Standard `overflow: hidden` doesn't prevent background scroll on iOS.
+ * Setting `position: fixed` + `width: 100%` is the reliable fix.
+ * JS saves/restores `scrollY` so the page doesn't jump to top on close.
+ */
+body.modal-open {
+  position: fixed;
+  width: 100%;
+  overflow-y: scroll; /* Keep scrollbar space to avoid layout shift */
+}
+
+/* ── Smooth Overscroll in Scrollable Containers ── */
+.overflow-y-auto,
+.overflow-y-scroll {
+  -webkit-overflow-scrolling: touch; /* Momentum scrolling on older iOS */
+  overscroll-behavior-y: contain;
+}
+
+/* ── Focus Visible (keyboard nav — Safari compatible) ──
+ * Safari < 15.4 doesn't support :focus-visible natively;
+ * using the polyfill pattern keeps it safe.
+ */
+:focus-visible {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
+}
+
+/* Remove outline for mouse/touch (non-keyboard) focus */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── Cross-browser transitions ──
+ * Force GPU-compositing for animated elements to prevent
+ * Safari's "flicker" bug on transforms/opacity animations.
+ */
+[data-framer-motion],
+.group,
+.transition-all,
+.transition-colors,
+.transition-transform {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: auto;
 }

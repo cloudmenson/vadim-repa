@@ -2,173 +2,190 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Mail, Phone, MapPin, Globe, Share2, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { Dictionary } from "@/i18n/dictionaries";
 import { handleSmoothScroll } from "@/lib/utils/scroll";
 
+/* Nav anchors — same in all locales, only labels change */
+const NAV_HREFS = ["#hero", "#services", "#about", "#why-us", "#process"];
+
+/* Service links all point to the services section */
+const SERVICE_HREFS = ["#services", "#services", "#services", "#services"];
+
 export function Footer({ dict }: { dict: Dictionary["footer"] }) {
   const pathname = usePathname();
-  const lang = pathname.split('/')[1] || 'uk';
+  const lang = pathname.split("/")[1] || "uk";
   const isSubPage = pathname !== `/${lang}` && pathname !== `/${lang}/`;
 
-  const handleFooterLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleFooterLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
     if (href.startsWith("#") && !isSubPage) {
       handleSmoothScroll(e, href);
     }
   };
 
   return (
-    <footer id="contact" className="bg-[#001a33] text-white py-20 relative overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          {/* Logo & Info */}
-          <div className="space-y-6">
-            <Link href={`/${lang}`} className="flex items-center gap-3 group">
+    <footer
+      id="contact"
+      className="bg-[#001a33] text-white py-16 sm:py-20 relative overflow-hidden"
+    >
+      {/* Subtle background grid */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage:
+            "linear-gradient(#0066cc 1px, transparent 1px), linear-gradient(90deg, #0066cc 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+        }}
+      />
+
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        {/* ── Main grid ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 mb-12 sm:mb-16">
+
+          {/* ── Logo & Desc ── */}
+          <div className="space-y-5 sm:col-span-2 lg:col-span-1">
+            <Link
+              href={`/${lang}`}
+              className="inline-flex items-center gap-3 group"
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo.svg" alt="VVA-logistic Logo" className="h-10 w-auto brightness-0 invert" />
+              <img
+                src="/logo.svg"
+                alt="VVA-logistic Logo"
+                className="h-9 w-auto brightness-0 invert"
+              />
               <span className="text-xl font-black tracking-tight">
                 VVA-logistic
               </span>
             </Link>
-            <p className="text-white/60 text-sm leading-relaxed max-w-xs font-medium">
+            <p className="text-white/55 text-sm leading-relaxed max-w-xs font-medium">
               {dict.desc}
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="p-2 bg-white/5 hover:bg-brand-light-blue transition-colors rounded-full">
-                <Globe className="h-5 w-5" />
+
+            {/* Phone quick-dial on mobile */}
+            <div className="flex flex-col gap-1 sm:hidden">
+              <a
+                href="tel:+380967804247"
+                className="text-base font-black text-white hover:text-brand-light-blue transition-colors"
+              >
+                +380 (96) 780 42 47
               </a>
-              <a href="#" className="p-2 bg-white/5 hover:bg-brand-light-blue transition-colors rounded-full">
-                <Share2 className="h-5 w-5" />
-              </a>
-              <a href="#" className="p-2 bg-white/5 hover:bg-brand-light-blue transition-colors rounded-full">
-                <MessageCircle className="h-5 w-5" />
+              <a
+                href="tel:+380770240073"
+                className="text-base font-black text-white hover:text-brand-light-blue transition-colors"
+              >
+                +380 077 024 00 73
               </a>
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* ── Navigation ── */}
           <div>
-            <h4 className="text-lg font-black uppercase tracking-widest mb-8">{dict.nav}</h4>
-            <ul className="space-y-4 text-white/60 font-medium">
-              <li>
-                <Link 
-                  href={isSubPage ? `/${lang}#hero` : "#hero"} 
-                  onClick={(e) => handleFooterLinkClick(e, "#hero")}
-                  className="hover:text-white transition-colors"
-                >
-                  Головна
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href={isSubPage ? `/${lang}#services` : "#services"} 
-                  onClick={(e) => handleFooterLinkClick(e, "#services")}
-                  className="hover:text-white transition-colors"
-                >
-                  Послуги
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href={isSubPage ? `/${lang}#about` : "#about"} 
-                  onClick={(e) => handleFooterLinkClick(e, "#about")}
-                  className="hover:text-white transition-colors"
-                >
-                  Про нас
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href={isSubPage ? `/${lang}#why-us` : "#why-us"} 
-                  onClick={(e) => handleFooterLinkClick(e, "#why-us")}
-                  className="hover:text-white transition-colors"
-                >
-                  Переваги
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href={isSubPage ? `/${lang}#process` : "#process"} 
-                  onClick={(e) => handleFooterLinkClick(e, "#process")}
-                  className="hover:text-white transition-colors"
-                >
-                  Як ми працюємо
-                </Link>
-              </li>
+            <h4 className="text-xs font-black uppercase tracking-[0.2em] text-white/40 mb-6">
+              {dict.nav}
+            </h4>
+            <ul className="space-y-3">
+              {dict.nav_items.map((name, idx) => {
+                const href = NAV_HREFS[idx] ?? "#hero";
+                return (
+                  <li key={idx}>
+                    <Link
+                      href={isSubPage ? `/${lang}${href}` : href}
+                      onClick={(e) => handleFooterLinkClick(e, href)}
+                      className="text-white/60 hover:text-white transition-colors text-sm font-medium inline-block"
+                    >
+                      {name}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
-          {/* Services */}
+          {/* ── Services ── */}
           <div>
-            <h4 className="text-lg font-black uppercase tracking-widest mb-8">{dict.services}</h4>
-            <ul className="space-y-4 text-white/60 font-medium">
-              <li>
-                <Link 
-                  href={isSubPage ? `/${lang}#services` : "#services"} 
-                  onClick={(e) => handleFooterLinkClick(e, "#services")}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  Міжнародні перевезення
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href={isSubPage ? `/${lang}#services` : "#services"} 
-                  onClick={(e) => handleFooterLinkClick(e, "#services")}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  Збірні вантажі
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href={isSubPage ? `/${lang}#services` : "#services"} 
-                  onClick={(e) => handleFooterLinkClick(e, "#services")}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  Митні документи
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href={isSubPage ? `/${lang}#services` : "#services"} 
-                  onClick={(e) => handleFooterLinkClick(e, "#services")}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  ADR вантажі
-                </Link>
-              </li>
+            <h4 className="text-xs font-black uppercase tracking-[0.2em] text-white/40 mb-6">
+              {dict.services}
+            </h4>
+            <ul className="space-y-3">
+              {dict.services_items.map((name, idx) => {
+                const href = SERVICE_HREFS[idx] ?? "#services";
+                return (
+                  <li key={idx}>
+                    <Link
+                      href={isSubPage ? `/${lang}${href}` : href}
+                      onClick={(e) => handleFooterLinkClick(e, href)}
+                      className="text-white/60 hover:text-white transition-colors text-sm font-medium inline-block"
+                    >
+                      {name}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* ── Contacts ── */}
           <div>
-            <h4 className="text-lg font-black uppercase tracking-widest mb-8">{dict.contacts}</h4>
+            <h4 className="text-xs font-black uppercase tracking-[0.2em] text-white/40 mb-6">
+              {dict.contacts}
+            </h4>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <Phone className="h-5 w-5 text-brand-light-blue shrink-0" />
+              <li className="hidden sm:flex items-start gap-3">
+                <Phone className="h-4 w-4 text-brand-light-blue shrink-0 mt-0.5" />
                 <div className="space-y-1">
-                  <a href="tel:+380975299495" className="block hover:text-brand-light-blue transition-colors font-bold">+38 (097) 529 94 95</a>
-                  <a href="tel:+380960229918" className="block hover:text-brand-light-blue transition-colors font-bold">+38 (096) 022 99 18</a>
+                  <a
+                    href="tel:+380967804247"
+                    className="block text-sm hover:text-brand-light-blue transition-colors font-bold"
+                  >
+                    +380 (96) 780 42 47
+                  </a>
+                  <a
+                    href="tel:+380770240073"
+                    className="block text-sm hover:text-brand-light-blue transition-colors font-bold"
+                  >
+                    +380 077 024 00 73
+                  </a>
                 </div>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="h-5 w-5 text-brand-light-blue shrink-0" />
-                <a href="mailto:vva-logistic@ukr.net" className="hover:text-brand-light-blue transition-colors font-bold">vva-logistic@ukr.net</a>
+                <Mail className="h-4 w-4 text-brand-light-blue shrink-0" />
+                <a
+                  href="mailto:vva-logistic@ukr.net"
+                  className="text-sm hover:text-brand-light-blue transition-colors font-bold break-all"
+                >
+                  vva-logistic@ukr.net
+                </a>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 text-brand-light-blue shrink-0" />
-                <span className="text-white/60 text-sm font-medium">{dict.city}</span>
+                <MapPin className="h-4 w-4 text-brand-light-blue shrink-0 mt-0.5" />
+                <span className="text-white/55 text-sm font-medium">
+                  {dict.city}
+                </span>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-white/40 text-xs font-bold uppercase tracking-widest">
-          <p>© 2026 VVA-logistic. All rights reserved.</p>
-          <div className="flex gap-8">
-            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+        {/* ── Bottom bar ── */}
+        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-white/35 text-[11px] font-bold uppercase tracking-widest">
+          <p>© {new Date().getFullYear()} VVA-logistic. {dict.copyright}</p>
+          <div className="flex gap-6">
+            <Link
+              href={`/${lang}/terms`}
+              className="hover:text-white transition-colors"
+            >
+              {dict.terms}
+            </Link>
+            <Link
+              href={`/${lang}/privacy`}
+              className="hover:text-white transition-colors"
+            >
+              {dict.privacy_policy}
+            </Link>
           </div>
         </div>
       </div>

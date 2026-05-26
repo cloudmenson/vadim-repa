@@ -8,7 +8,9 @@
       "process": "How it works",
       "contacts": "Contacts"
     },
-    "calculate": "Calculate"
+    "calculate": "Calculate",
+    "contact_label": "Contact us",
+    "lang_label": "Language"
   },
   "hero": {
     "title": "VVA-logistic",
@@ -100,8 +102,13 @@
   "footer": {
     "desc": "International cargo transportation in Europe and Ukraine. Reliability, safety and professionalism in every delivery.",
     "nav": "Navigation",
+    "nav_items": ["Home", "Services", "About Us", "Advantages", "How we work"],
     "services": "Services",
+    "services_items": ["International Transport", "Groupage Cargo", "Customs Documents", "ADR Cargo"],
     "contacts": "Contacts",
-    "city": "Kyiv, Ukraine"
+    "city": "Kyiv, Ukraine",
+    "copyright": "All rights reserved.",
+    "terms": "Terms of Service",
+    "privacy_policy": "Privacy Policy"
   }
 }
