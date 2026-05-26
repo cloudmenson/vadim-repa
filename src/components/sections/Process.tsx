@@ -55,7 +55,7 @@ export function Process({ dict, formDict }: { dict: Dictionary["process"]; formD
           <div className="mt-16 lg:mt-24 text-center">
             <button 
               onClick={() => setIsQuoteOpen(true)}
-              className="w-full sm:w-auto bg-white hover:bg-brand-light-blue hover:text-white text-brand-blue font-black px-8 lg:px-12 py-5 lg:py-6 uppercase tracking-widest text-sm sm:text-base lg:text-lg transition-all shadow-2xl active:scale-95"
+              className="w-full sm:w-auto bg-white hover:bg-brand-light-blue hover:text-white text-brand-blue font-black px-8 lg:px-12 py-5 lg:py-6 uppercase tracking-widest text-sm sm:text-base lg:text-lg transition-all shadow-2xl active:scale-95 cursor-pointer"
             >
               {dict.button}
             </button>
