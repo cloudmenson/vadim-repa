@@ -19,7 +19,7 @@ export function Footer({ dict }: { dict: Dictionary["footer"] }) {
 
   const handleFooterLinkClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
+    href: string,
   ) => {
     if (href.startsWith("#") && !isSubPage) {
       handleSmoothScroll(e, href);
@@ -44,7 +44,6 @@ export function Footer({ dict }: { dict: Dictionary["footer"] }) {
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* ── Main grid ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 mb-12 sm:mb-16">
-
           {/* ── Logo & Desc ── */}
           <div className="space-y-5 sm:col-span-2 lg:col-span-1">
             <Link
@@ -56,7 +55,7 @@ export function Footer({ dict }: { dict: Dictionary["footer"] }) {
               <img
                 src="/logo.svg"
                 alt="VVA-logistic Logo"
-                className="h-14 sm:h-16 w-auto brightness-0 invert"
+                className="h-20 sm:h-20 w-auto brightness-0 invert"
               />
             </Link>
             <p className="text-white/55 text-sm leading-relaxed max-w-xs font-medium">
@@ -170,7 +169,9 @@ export function Footer({ dict }: { dict: Dictionary["footer"] }) {
 
         {/* ── Bottom bar ── */}
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-white/35 text-[11px] font-bold uppercase tracking-widest">
-          <p>© {new Date().getFullYear()} VVA-logistic. {dict.copyright}</p>
+          <p>
+            © {new Date().getFullYear()} VVA-logistic. {dict.copyright}
+          </p>
           <div className="flex gap-6">
             <Link
               href={`/${lang}/terms`}

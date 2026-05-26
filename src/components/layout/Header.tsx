@@ -14,14 +14,14 @@ import { handleSmoothScroll } from "@/lib/utils/scroll";
 
 /* ── Constants ─────────────────────────────────────────── */
 const PHONE_1 = { display: "+380 (96) 780 42 47", href: "tel:+380967804247" };
-const PHONE_2 = { display: "+380 077 024 00 73",  href: "tel:+380770240073" };
-const EMAIL   = "vva-logistic@ukr.net";
+const PHONE_2 = { display: "+380 077 024 00 73", href: "tel:+380770240073" };
+const EMAIL = "vva-logistic@ukr.net";
 
 /* ─────────────────────────────────────────────────────────
  * Header
  * ───────────────────────────────────────────────────────── */
 export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
-  const [isScrolled, setIsScrolled]   = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
   const { mobileMenuOpen, setMobileMenuOpen } = useMenu();
   const pathname = usePathname();
@@ -29,12 +29,12 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
   const isSubPage = pathname !== `/${lang}` && pathname !== `/${lang}/`;
 
   const navigation = [
-    { name: dict.header.nav.home,       href: "#hero"    },
-    { name: dict.header.nav.services,   href: "#services" },
-    { name: dict.header.nav.about,      href: "#about"   },
-    { name: dict.header.nav.advantages, href: "#why-us"  },
-    { name: dict.header.nav.process,    href: "#process" },
-    { name: dict.header.nav.contacts,   href: "#contact" },
+    { name: dict.header.nav.home, href: "#hero" },
+    { name: dict.header.nav.services, href: "#services" },
+    { name: dict.header.nav.about, href: "#about" },
+    { name: dict.header.nav.advantages, href: "#why-us" },
+    { name: dict.header.nav.process, href: "#process" },
+    { name: dict.header.nav.contacts, href: "#contact" },
   ];
 
   /* Scroll detection */
@@ -46,7 +46,7 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
+    href: string,
   ) => {
     setMobileMenuOpen(false);
     if (href.startsWith("#") && !isSubPage) handleSmoothScroll(e, href);
@@ -67,25 +67,24 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
           "fixed top-0 z-50 w-full transition-all duration-300",
           isHeaderWhite
             ? "bg-white py-3 border-b border-black/5 shadow-sm"
-            : "bg-transparent py-4 lg:py-6"
+            : "bg-transparent py-4 lg:py-6",
         )}
       >
         <nav className="container mx-auto flex items-center justify-between px-4 sm:px-6">
-
           {/* Logo */}
           <Link
             href={`/${lang}`}
             className="flex items-center"
             onClick={() => setMobileMenuOpen(false)}
           >
-            <div className="h-10 sm:h-12 lg:h-14">
+            <div className="h-20">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/logo.svg"
                 alt="VVA-logistic"
                 className={cn(
                   "h-full w-auto transition-all duration-300",
-                  isHeaderWhite ? "brightness-100" : "brightness-0 invert"
+                  isHeaderWhite ? "brightness-100" : "brightness-0 invert",
                 )}
               />
             </div>
@@ -102,7 +101,7 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
                   "relative text-[12px] font-black uppercase tracking-wider transition-colors group",
                   isHeaderWhite
                     ? "text-brand-gray hover:text-brand-blue"
-                    : "text-white/80 hover:text-white"
+                    : "text-white/80 hover:text-white",
                 )}
               >
                 {item.name}
@@ -113,7 +112,7 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
             <div
               className={cn(
                 "flex items-center gap-4 pl-5 ml-1 border-l",
-                isHeaderWhite ? "border-black/10" : "border-white/20"
+                isHeaderWhite ? "border-black/10" : "border-white/20",
               )}
             >
               <LanguageSwitcher currentLang={lang} isScrolled={isHeaderWhite} />
@@ -121,7 +120,7 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
                 href={PHONE_1.href}
                 className={cn(
                   "text-sm font-black transition-colors whitespace-nowrap",
-                  isHeaderWhite ? "text-brand-blue" : "text-white"
+                  isHeaderWhite ? "text-brand-blue" : "text-white",
                 )}
               >
                 {PHONE_1.display}
@@ -144,7 +143,7 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
                 "p-2.5 rounded-full transition-colors",
                 isHeaderWhite
                   ? "bg-brand-blue/5 text-brand-blue"
-                  : "bg-white/10 text-white"
+                  : "bg-white/10 text-white",
               )}
             >
               <Phone className="h-4.5 w-4.5" />
@@ -159,14 +158,15 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
                 "p-2.5 rounded-full transition-colors cursor-pointer",
                 isHeaderWhite
                   ? "bg-brand-blue/5 text-brand-blue"
-                  : "bg-white/10 text-white"
+                  : "bg-white/10 text-white",
               )}
             >
               {/* Simple icon swap — no nested AnimatePresence */}
-              {mobileMenuOpen
-                ? <X className="h-4.5 w-4.5" />
-                : <Menu className="h-4.5 w-4.5" />
-              }
+              {mobileMenuOpen ? (
+                <X className="h-4.5 w-4.5" />
+              ) : (
+                <Menu className="h-4.5 w-4.5" />
+              )}
             </button>
           </div>
         </nav>
@@ -272,19 +272,23 @@ function MobileMenu({
   const listVariants = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.045, delayChildren: 0.1 } },
-    exit:   {},
+    exit: {},
   };
 
   const itemVariants = {
-    hidden:   { opacity: 0, x: -18 },
-    visible:  { opacity: 1, x: 0, transition: { ease: [0.16, 1, 0.3, 1] as const, duration: 0.38 } },
-    exit:     { opacity: 0 },
+    hidden: { opacity: 0, x: -18 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { ease: [0.16, 1, 0.3, 1] as const, duration: 0.38 },
+    },
+    exit: { opacity: 0 },
   };
 
   const footerVariants = {
-    hidden:  { opacity: 0, y: 10 },
+    hidden: { opacity: 0, y: 10 },
     visible: { opacity: 1, y: 0, transition: { delay: 0.32, duration: 0.3 } },
-    exit:    { opacity: 0 },
+    exit: { opacity: 0 },
   };
 
   return (
@@ -302,7 +306,6 @@ function MobileMenu({
           className="fixed inset-0 z-40 bg-white flex flex-col xl:hidden overflow-y-auto overscroll-contain"
           style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
         >
-
           {/* ── Top spacer (matches header height) ── */}
           <div className="h-16 sm:h-20 shrink-0" />
 
@@ -344,9 +347,10 @@ function MobileMenu({
             animate="visible"
             exit="exit"
             className="px-5 sm:px-8 pt-4 pb-8 space-y-5"
-            style={{ paddingBottom: "max(2rem, env(safe-area-inset-bottom, 2rem))" }}
+            style={{
+              paddingBottom: "max(2rem, env(safe-area-inset-bottom, 2rem))",
+            }}
           >
-
             {/* Divider */}
             <div className="w-full h-px bg-neutral-100" />
 
