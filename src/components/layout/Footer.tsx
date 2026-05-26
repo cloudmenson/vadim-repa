@@ -1,107 +1,89 @@
-import { Ship, Mail, Phone, MapPin, Globe, MessageSquare, Share2, Shield } from "lucide-react";
+"use client";
+
 import Link from "next/link";
+import { Mail, Phone, MapPin, Globe, Share2, MessageCircle } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer id="contact" className="bg-neutral-950 pt-32 pb-12 border-t border-white/5 relative overflow-hidden">
-      {/* Background Accent */}
-      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-blue-500/5 blur-[120px] -z-10" />
-
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
-          <div className="flex flex-col gap-8">
-            <Link href="/" className="flex items-center gap-2 group w-fit">
-              <Ship className="h-10 w-10 text-blue-500 transition-transform group-hover:scale-110" />
-              <span className="text-2xl font-black tracking-tighter text-white">LOGIPRO</span>
+    <footer id="contact" className="bg-[#001a33] text-white py-20 relative overflow-hidden">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          {/* Logo & Info */}
+          <div className="space-y-6">
+            <Link href="/" className="flex items-center gap-3 group">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo.svg" alt="VVA-logistic Logo" className="h-10 w-auto brightness-0 invert" />
+              <span className="text-xl font-black tracking-tight">
+                VVA-logistic
+              </span>
             </Link>
-            <p className="text-neutral-400 text-lg leading-relaxed font-medium">
-              Global leaders in freight forwarding and supply chain optimization. 
-              Engineering the future of autonomous logistics since 2012.
+            <p className="text-white/60 text-sm leading-relaxed max-w-xs font-medium">
+              Міжнародні вантажоперевезення по Європі та Україні. Надійність, безпека та професіоналізм у кожній доставці.
             </p>
             <div className="flex gap-4">
-              {[Globe, MessageSquare, Share2, Shield].map((Icon, i) => (
-                <Link 
-                  key={i} 
-                  href="#" 
-                  className="h-12 w-12 rounded-xl bg-neutral-900 border border-white/5 flex items-center justify-center text-neutral-400 hover:text-white hover:border-blue-500/50 hover:bg-blue-600/10 transition-all group"
-                >
-                  <Icon className="h-5 w-5 transition-transform group-hover:scale-110" />
-                </Link>
-              ))}
+              <a href="#" className="p-2 bg-white/5 hover:bg-brand-light-blue transition-colors rounded-full">
+                <Globe className="h-5 w-5" />
+              </a>
+              <a href="#" className="p-2 bg-white/5 hover:bg-brand-light-blue transition-colors rounded-full">
+                <Share2 className="h-5 w-5" />
+              </a>
+              <a href="#" className="p-2 bg-white/5 hover:bg-brand-light-blue transition-colors rounded-full">
+                <MessageCircle className="h-5 w-5" />
+              </a>
             </div>
           </div>
 
+          {/* Quick Links */}
           <div>
-            <h4 className="text-white text-sm font-black uppercase tracking-[0.3em] mb-10">Navigation</h4>
-            <ul className="flex flex-col gap-5 text-neutral-400">
-              {["Services", "About Us", "Case Studies", "Contact"].map((item) => (
-                <li key={item}>
-                  <Link href={`#${item.toLowerCase()}`} className="group flex items-center gap-2 hover:text-white transition-colors">
-                    <span className="h-px w-0 bg-blue-500 group-hover:w-4 transition-all" />
-                    <span className="font-medium">{item}</span>
-                  </Link>
-                </li>
-              ))}
+            <h4 className="text-lg font-black uppercase tracking-widest mb-8">Навігація</h4>
+            <ul className="space-y-4 text-white/60 font-medium">
+              <li><Link href="#hero" className="hover:text-white transition-colors">Головна</Link></li>
+              <li><Link href="#services" className="hover:text-white transition-colors">Послуги</Link></li>
+              <li><Link href="#about" className="hover:text-white transition-colors">Про нас</Link></li>
+              <li><Link href="#why-us" className="hover:text-white transition-colors">Переваги</Link></li>
+              <li><Link href="#process" className="hover:text-white transition-colors">Як ми працюємо</Link></li>
             </ul>
           </div>
 
+          {/* Services */}
           <div>
-            <h4 className="text-white text-sm font-black uppercase tracking-[0.3em] mb-10">Solutions</h4>
-            <ul className="flex flex-col gap-5 text-neutral-400">
-              {["Road Freight", "Air Cargo", "Ocean Freight", "Warehousing"].map((item) => (
-                <li key={item} className="group flex items-center gap-2 font-medium cursor-default">
-                  <span className="h-1 w-1 rounded-full bg-blue-500/40 group-hover:bg-blue-500 transition-all" />
-                  {item}
-                </li>
-              ))}
+            <h4 className="text-lg font-black uppercase tracking-widest mb-8">Послуги</h4>
+            <ul className="space-y-4 text-white/60 font-medium">
+              <li>Міжнародні перевезення</li>
+              <li>Збірні вантажі</li>
+              <li>Митні документи</li>
+              <li>ADR вантажі</li>
             </ul>
           </div>
 
+          {/* Contact Info */}
           <div>
-            <h4 className="text-white text-sm font-black uppercase tracking-[0.3em] mb-10">Get in Touch</h4>
-            <ul className="flex flex-col gap-6 text-neutral-400">
-              <li className="flex items-start gap-4">
-                <div className="h-10 w-10 rounded-lg bg-blue-600/10 flex items-center justify-center shrink-0">
-                  <Phone className="h-5 w-5 text-blue-500" />
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-white uppercase tracking-wider mb-1">Call Us</p>
-                  <span className="text-sm font-medium">+1 (234) 567-890</span>
+            <h4 className="text-lg font-black uppercase tracking-widest mb-8">Контакти</h4>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3">
+                <Phone className="h-5 w-5 text-brand-light-blue shrink-0" />
+                <div className="space-y-1">
+                  <a href="tel:+380975299495" className="block hover:text-brand-light-blue transition-colors font-bold">+38 (097) 529 94 95</a>
+                  <a href="tel:+380960229918" className="block hover:text-brand-light-blue transition-colors font-bold">+38 (096) 022 99 18</a>
                 </div>
               </li>
-              <li className="flex items-start gap-4">
-                <div className="h-10 w-10 rounded-lg bg-blue-600/10 flex items-center justify-center shrink-0">
-                  <Mail className="h-5 w-5 text-blue-500" />
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-white uppercase tracking-wider mb-1">Email Us</p>
-                  <span className="text-sm font-medium">contact@logipro.com</span>
-                </div>
+              <li className="flex items-center gap-3">
+                <Mail className="h-5 w-5 text-brand-light-blue shrink-0" />
+                <a href="mailto:vva-logistic@ukr.net" className="hover:text-brand-light-blue transition-colors font-bold">vva-logistic@ukr.net</a>
               </li>
-              <li className="flex items-start gap-4">
-                <div className="h-10 w-10 rounded-lg bg-blue-600/10 flex items-center justify-center shrink-0">
-                  <MapPin className="h-5 w-5 text-blue-500" />
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-white uppercase tracking-wider mb-1">Visit Us</p>
-                  <span className="text-sm font-medium">123 Logistics Way, Global City, NY</span>
-                </div>
+              <li className="flex items-start gap-3">
+                <MapPin className="h-5 w-5 text-brand-light-blue shrink-0" />
+                <span className="text-white/60 text-sm font-medium">Україна, м. Київ</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-sm text-neutral-500 font-medium italic">
-            &quot;Delivering the future, today.&quot;
-          </p>
-          <div className="flex flex-col md:flex-row items-center gap-8 text-xs font-bold uppercase tracking-widest text-neutral-500">
-            <p>© 2026 Logistics Pro Inc.</p>
-            <div className="flex gap-8">
-              <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
-              <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
-              <Link href="/cookies" className="hover:text-white transition-colors">Cookies</Link>
-            </div>
+        <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-white/40 text-xs font-bold uppercase tracking-widest">
+          <p>© 2026 VVA-logistic. All rights reserved.</p>
+          <div className="flex gap-8">
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
           </div>
         </div>
       </div>

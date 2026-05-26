@@ -2,41 +2,48 @@
 
 @theme {
   --font-sans: var(--font-inter);
+  --color-brand-blue: #003366;
+  --color-brand-light-blue: #0066cc;
+  --color-brand-gray: #333333;
 }
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #ffffff;
+  --foreground: #111111;
+  --primary: #003366;
 }
 
 @layer base {
   * {
-    @apply border-white/10;
+    @apply border-black/5;
   }
   body {
-    @apply bg-neutral-950 text-neutral-50 selection:bg-blue-500/30;
+    @apply bg-white text-brand-gray selection:bg-brand-blue/10 selection:text-brand-blue;
   }
 }
 
-/* Custom Scrollbar for 2026 Standard */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #262626;
-  border-radius: 10px;
-  border: 2px solid #0a0a0a;
+  background: #003366;
+  border-radius: 5px;
+  border: 3px solid #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #404040;
+  background: #0066cc;
 }
 
-html {
+html,
+body {
+  overscroll-behavior: none;
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }

@@ -1,0 +1,53 @@
+{
+  "header": {
+    "nav": {
+      "home": "Home",
+      "services": "Services",
+      "about": "About",
+      "advantages": "Advantages",
+      "process": "How it works",
+      "contacts": "Contacts"
+    },
+    "calculate": "Calculate"
+  },
+  "hero": {
+    "title": "VVA-logistic",
+    "subtitle": "Reliable partner in international cargo transportation",
+    "description": "We deliver cargo quickly, safely and exactly on time throughout Europe and Ukraine.",
+    "stats": "Verified cars",
+    "form": {
+      "title": "Calculate Cost",
+      "name": "Your Name",
+      "phone": "Phone",
+      "route": "From / To",
+      "type": "Cargo Type",
+      "button": "Get Calculation",
+      "privacy": "By clicking the button, you agree to the privacy policy"
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "items": {
+      "intl": {
+        "title": "International Transport",
+        "desc": "International road transport of full and groupage cargo;"
+      },
+      "imp_exp": {
+        "title": "Import / Export",
+        "desc": "Transportation of goods in import and export connections;"
+      },
+      "customs": {
+        "title": "Customs Clearance",
+        "desc": "Execution of customs and transport documentation, translation of documents into Ukrainian, execution of permitting documentation;"
+      },
+      "special": {
+        "title": "Special Cargo",
+        "desc": "Transportation of oversized and dangerous goods, including under temperature conditions;"
+      },
+      "support": {
+        "title": "Support",
+        "desc": "Insurance and cargo support."
+      }
+    }
+  }
+}

@@ -2,26 +2,30 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Ship, Menu, X } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { QuoteModal } from "@/components/ui/QuoteModal";
+import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
+import { Dictionary } from "@/i18n/dictionaries";
 
-const navigation = [
-  { name: "Services", href: "#services" },
-  { name: "About", href: "#about" },
-  { name: "Stats", href: "#stats" },
-  { name: "Contact", href: "#contact" },
-];
-
-export function Header() {
+export function Header({ lang, dict }: { lang: string; dict: Dictionary["header"] }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
 
+  const navigation = [
+    { name: dict.nav.home, href: "#hero" },
+    { name: dict.nav.services, href: "#services" },
+    { name: dict.nav.about, href: "#about" },
+    { name: dict.nav.advantages, href: "#why-us" },
+    { name: dict.nav.process, href: "#process" },
+    { name: dict.nav.contacts, href: "#contact" },
+  ];
+
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -38,83 +42,139 @@ export function Header() {
     };
   }, [mobileMenuOpen]);
 
+  // Handle anchor link clicks to close mobile menu
+  const handleLinkClick = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
     <>
       <header
         className={cn(
-          "fixed top-0 z-50 w-full transition-all duration-500",
-          isScrolled
-            ? "bg-neutral-950/70 backdrop-blur-xl py-3 border-b border-white/5"
-            : "bg-transparent py-6",
+          "fixed top-0 z-50 w-full transition-all duration-300",
+          mobileMenuOpen 
+            ? "bg-white py-3" 
+            : (isScrolled 
+                ? "bg-white/95 backdrop-blur-md py-3 border-b border-black/5 shadow-sm" 
+                : "bg-transparent py-4 lg:py-6")
         )}
       >
-        <nav className="container mx-auto flex items-center justify-between px-6">
-          <Link href="/" className="flex items-center gap-2 group relative z-[60]">
-            <div className="relative">
-              <Ship className="h-8 w-8 text-blue-500 transition-transform group-hover:scale-110" />
-              <div className="absolute -inset-1 bg-blue-500/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+        <nav className="container mx-auto flex items-center justify-between px-4 sm:px-6 relative z-[70]">
+          <Link
+            href={`/${lang}`}
+            className="flex items-center group"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <div className="relative h-10 sm:h-12 lg:h-16">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/logo.svg"
+                alt="VVA-logistic Logo"
+                className={cn(
+                  "h-full w-auto transition-all duration-300",
+                  (isScrolled || mobileMenuOpen) ? "brightness-100" : "brightness-0 invert",
+                )}
+              />
             </div>
-            <span className="text-xl font-bold tracking-tighter text-white">
-              LOGIPRO
-            </span>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-10">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="relative text-sm font-medium text-neutral-400 hover:text-white transition-colors group"
-              >
-                {item.name}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-blue-500 transition-all group-hover:w-full" />
-              </Link>
-            ))}
-            <button
-              onClick={() => setIsQuoteOpen(true)}
-              className="relative overflow-hidden rounded-full bg-blue-600 px-7 py-2.5 text-sm font-bold text-white transition-all hover:bg-blue-500 hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] active:scale-95 cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500 outline-none"
+          <div className="hidden xl:flex items-center gap-6">
+            <div className="flex items-center gap-6 mr-4">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    "relative text-[13px] font-bold uppercase tracking-wider transition-colors group",
+                    isScrolled
+                      ? "text-brand-gray hover:text-brand-blue"
+                      : "text-white/80 hover:text-white",
+                  )}
+                >
+                  {item.name}
+                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-brand-light-blue transition-all group-hover:w-full" />
+                </Link>
+              ))}
+            </div>
+
+            <div
+              className={cn(
+                "flex items-center gap-4 pl-6 border-l",
+                isScrolled ? "border-black/10" : "border-white/20",
+              )}
             >
-              Get a Quote
-            </button>
+              <LanguageSwitcher currentLang={lang} isScrolled={isScrolled} />
+              <a
+                href="tel:+380975299495"
+                className={cn(
+                  "text-sm font-black transition-colors whitespace-nowrap",
+                  isScrolled ? "text-brand-blue" : "text-white",
+                )}
+              >
+                +38 (097) 529 94 95
+              </a>
+              <button
+                onClick={() => setIsQuoteOpen(true)}
+                className="rounded-full bg-brand-light-blue px-6 py-2.5 text-xs font-black uppercase tracking-widest text-white transition-all hover:bg-brand-blue hover:shadow-lg active:scale-95 cursor-pointer outline-none"
+              >
+                {dict.calculate}
+              </button>
+            </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-white relative z-[60] cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500 outline-none"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? (
-              <X className="h-8 w-8" />
-            ) : (
-              <Menu className="h-8 w-8" />
-            )}
-          </button>
+          {/* Tablet/Mobile Action & Toggle */}
+          <div className="flex xl:hidden items-center gap-4">
+            <a
+              href="tel:+380975299495"
+              className={cn(
+                "p-2 rounded-full transition-colors",
+                (isScrolled || mobileMenuOpen) ? "bg-brand-blue/5 text-brand-blue" : "bg-white/10 text-white"
+              )}
+            >
+              <Phone className="h-5 w-5" />
+            </a>
+            
+            <button
+              className={cn(
+                "relative p-2 -mr-2 cursor-pointer outline-none transition-colors",
+                (isScrolled || mobileMenuOpen) ? "text-brand-blue" : "text-white",
+              )}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? (
+                <X className="h-8 w-8" />
+              ) : (
+                <Menu className="h-8 w-8" />
+              )}
+            </button>
+          </div>
         </nav>
 
         {/* Mobile Nav Overlay */}
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, x: "100%" }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-0 z-[55] flex flex-col bg-neutral-950 md:hidden"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-[60] flex flex-col bg-white xl:hidden overflow-y-auto"
             >
-              <div className="flex flex-col h-full p-8 pt-32">
-                <div className="flex flex-col gap-10">
+              <div className="flex flex-col min-h-full p-6 pt-28 pb-10">
+                <div className="flex flex-col gap-1">
                   {navigation.map((item, idx) => (
                     <motion.div
                       key={item.name}
-                      initial={{ opacity: 0, x: 20 }}
+                      initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 + idx * 0.1 }}
+                      transition={{ delay: 0.05 * idx }}
                     >
                       <Link
                         href={item.href}
-                        className="text-6xl font-black tracking-tighter text-neutral-500 hover:text-white transition-colors"
-                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-4 text-3xl sm:text-4xl font-black tracking-tight text-brand-blue active:text-brand-light-blue transition-colors border-b border-neutral-50"
+                        onClick={handleLinkClick}
                       >
                         {item.name}
                       </Link>
@@ -122,20 +182,45 @@ export function Header() {
                   ))}
                 </div>
 
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="mt-auto mb-10"
+                  transition={{ delay: 0.3 }}
+                  className="mt-auto pt-10 flex flex-col gap-8"
                 >
+                  <div className="flex items-center justify-between bg-neutral-50 p-4 rounded-2xl">
+                    <span className="text-xs font-black uppercase tracking-widest text-neutral-400">
+                      Мова / Language
+                    </span>
+                    <LanguageSwitcher currentLang={lang} isScrolled={true} />
+                  </div>
+                  
+                  <div className="flex flex-col gap-2">
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400 px-1">
+                      Зв&apos;язок з нами
+                    </span>
+                    <a
+                      href="tel:+380975299495"
+                      className="text-2xl font-black text-brand-blue px-1"
+                    >
+                      +38 (097) 529 94 95
+                    </a>
+                    <a
+                      href="mailto:vva-logistic@ukr.net"
+                      className="text-lg font-bold text-brand-light-blue px-1"
+                    >
+                      vva-logistic@ukr.net
+                    </a>
+                  </div>
+
                   <button
                     onClick={() => {
                       setMobileMenuOpen(false);
                       setIsQuoteOpen(true);
                     }}
-                    className="w-full rounded-2xl bg-blue-600 py-6 text-2xl font-black text-white shadow-2xl shadow-blue-500/20 active:scale-[0.98] transition-transform"
+                    className="w-full rounded-2xl bg-brand-blue py-5 text-xl font-black text-white shadow-xl shadow-brand-blue/20 active:scale-[0.98] transition-all"
                   >
-                    Get a Quote
+                    {dict.calculate}
                   </button>
                 </motion.div>
               </div>
