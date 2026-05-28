@@ -77,7 +77,7 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
             className="flex items-center"
             onClick={() => setMobileMenuOpen(false)}
           >
-            <div className="h-20">
+            <div className="h-10 sm:h-18">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/logo.svg"
@@ -239,43 +239,60 @@ function MobileMenu({
       });
     } else {
       Object.assign(document.body.style, {
-        overflow: "", position: "", width: "", top: "",
+        overflow: "",
+        position: "",
+        width: "",
+        top: "",
       });
       window.scrollTo({ top: savedScroll.current, behavior: "instant" });
     }
     return () => {
       Object.assign(document.body.style, {
-        overflow: "", position: "", width: "", top: "",
+        overflow: "",
+        position: "",
+        width: "",
+        top: "",
       });
     };
   }, [isOpen]);
 
   /* Animation variants */
   const panelVariants = {
-    hidden:  { opacity: 0, y: "-5%", scale: 0.98 },
-    visible: { opacity: 1, y: "0%", scale: 1,
-      transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] as const } },
-    exit:    { opacity: 0, y: "-3%", scale: 0.98,
-      transition: { duration: 0.2, ease: [0.4, 0, 1, 1] as const } },
+    hidden: { opacity: 0, y: "-5%", scale: 0.98 },
+    visible: {
+      opacity: 1,
+      y: "0%",
+      scale: 1,
+      transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] as const },
+    },
+    exit: {
+      opacity: 0,
+      y: "-3%",
+      scale: 0.98,
+      transition: { duration: 0.2, ease: [0.4, 0, 1, 1] as const },
+    },
   };
 
   const listVariants = {
-    hidden:  {},
+    hidden: {},
     visible: { transition: { staggerChildren: 0.04, delayChildren: 0.08 } },
-    exit:    {},
+    exit: {},
   };
 
   const itemVariants = {
-    hidden:   { opacity: 0, x: -16 },
-    visible:  { opacity: 1, x: 0,
-      transition: { ease: [0.16, 1, 0.3, 1] as const, duration: 0.35 } },
-    exit:     { opacity: 0 },
+    hidden: { opacity: 0, x: -16 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { ease: [0.16, 1, 0.3, 1] as const, duration: 0.35 },
+    },
+    exit: { opacity: 0 },
   };
 
   const bottomVariants = {
-    hidden:  { opacity: 0, y: 8 },
+    hidden: { opacity: 0, y: 8 },
     visible: { opacity: 1, y: 0, transition: { delay: 0.28, duration: 0.28 } },
-    exit:    { opacity: 0 },
+    exit: { opacity: 0 },
   };
 
   return (
@@ -294,7 +311,6 @@ function MobileMenu({
           className="fixed inset-0 z-60 bg-white flex flex-col xl:hidden overflow-y-auto overscroll-contain"
           style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
         >
-
           {/* ── Own header row (logo + close) ── */}
           <div className="flex items-center justify-between px-4 sm:px-6 h-16 sm:h-20 border-b border-neutral-100 shrink-0">
             <Link
@@ -356,7 +372,9 @@ function MobileMenu({
             animate="visible"
             exit="exit"
             className="px-5 sm:px-8 pb-8 space-y-4 border-t border-neutral-100"
-            style={{ paddingBottom: "max(2rem, env(safe-area-inset-bottom, 2rem))" }}
+            style={{
+              paddingBottom: "max(2rem, env(safe-area-inset-bottom, 2rem))",
+            }}
           >
             {/* Language */}
             <div className="flex items-center justify-between pt-4">

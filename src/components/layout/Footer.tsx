@@ -9,7 +9,6 @@ import { handleSmoothScroll } from "@/lib/utils/scroll";
 /* Nav anchors — same in all locales, only labels change */
 const NAV_HREFS = ["#hero", "#services", "#about", "#why-us", "#process"];
 
-
 export function Footer({ dict }: { dict: Dictionary["footer"] }) {
   const pathname = usePathname();
   const lang = pathname.split("/")[1] || "uk";
@@ -53,7 +52,7 @@ export function Footer({ dict }: { dict: Dictionary["footer"] }) {
               <img
                 src="/logo.svg"
                 alt="VVA-logistic Logo"
-                className="h-20 sm:h-20 w-auto brightness-0 invert"
+                className="h-10 sm:h-18 w-auto brightness-0 invert"
               />
             </Link>
             <p className="text-white/55 text-sm leading-relaxed max-w-xs font-medium">
@@ -113,7 +112,7 @@ export function Footer({ dict }: { dict: Dictionary["footer"] }) {
                       if (!isSubPage) {
                         handleSmoothScroll(
                           e as unknown as React.MouseEvent<HTMLAnchorElement>,
-                          "#services"
+                          "#services",
                         );
                       } else {
                         window.location.href = `/${lang}#services`;
