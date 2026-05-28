@@ -104,7 +104,7 @@
     "nav": "Navigation",
     "nav_items": ["Home", "Services", "About Us", "Advantages", "How we work"],
     "services": "Services",
-    "services_items": ["International Transport", "Groupage Cargo", "Customs Documents", "ADR Cargo"],
+    "services_items": ["International Transport", "Groupage Cargo", "Import / Export", "Customs Documents", "ADR Cargo", "Support and Insurance"],
     "contacts": "Contacts",
     "city": "Kyiv, Ukraine",
     "copyright": "All rights reserved.",
