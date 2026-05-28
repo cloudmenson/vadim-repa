@@ -9,8 +9,6 @@ import { handleSmoothScroll } from "@/lib/utils/scroll";
 /* Nav anchors — same in all locales, only labels change */
 const NAV_HREFS = ["#hero", "#services", "#about", "#why-us", "#process"];
 
-/* Service links all point to the services section */
-const SERVICE_HREFS = ["#services", "#services", "#services", "#services"];
 
 export function Footer({ dict }: { dict: Dictionary["footer"] }) {
   const pathname = usePathname();
@@ -108,20 +106,25 @@ export function Footer({ dict }: { dict: Dictionary["footer"] }) {
               {dict.services}
             </h4>
             <ul className="space-y-3">
-              {dict.services_items.map((name, idx) => {
-                const href = SERVICE_HREFS[idx] ?? "#services";
-                return (
-                  <li key={idx}>
-                    <Link
-                      href={isSubPage ? `/${lang}${href}` : href}
-                      onClick={(e) => handleFooterLinkClick(e, href)}
-                      className="text-white/60 hover:text-white transition-colors text-sm font-medium inline-block"
-                    >
-                      {name}
-                    </Link>
-                  </li>
-                );
-              })}
+              {dict.services_items.map((name) => (
+                <li key={name}>
+                  <button
+                    onClick={(e) => {
+                      if (!isSubPage) {
+                        handleSmoothScroll(
+                          e as unknown as React.MouseEvent<HTMLAnchorElement>,
+                          "#services"
+                        );
+                      } else {
+                        window.location.href = `/${lang}#services`;
+                      }
+                    }}
+                    className="text-white/60 text-sm font-medium text-left cursor-pointer transition-colors duration-150 [@media(hover:hover)]:hover:text-white active:text-white"
+                  >
+                    {name}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
 

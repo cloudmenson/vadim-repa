@@ -182,6 +182,7 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
         isSubPage={isSubPage}
         onNavClick={handleNavClick}
         onQuoteOpen={openQuote}
+        onClose={() => setMobileMenuOpen(false)}
       />
 
       {/* ── Quote modal ── */}
@@ -195,8 +196,11 @@ export function Header({ lang, dict }: { lang: string; dict: Dictionary }) {
 }
 
 /* ─────────────────────────────────────────────────────────
- * MobileMenu — completely standalone, zero dependencies
- * on parent scroll/overflow logic.
+ * MobileMenu
+ *
+ * z-60 — sits ABOVE the <header> (z-50) so the fixed header
+ * bar is fully covered and doesn't "bleed through" the overlay.
+ * The menu has its own logo + close-button row at the top.
  * ───────────────────────────────────────────────────────── */
 interface MobileMenuProps {
   id: string;
@@ -207,6 +211,7 @@ interface MobileMenuProps {
   isSubPage: boolean;
   onNavClick: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
   onQuoteOpen: () => void;
+  onClose: () => void;
 }
 
 function MobileMenu({
@@ -218,10 +223,11 @@ function MobileMenu({
   isSubPage,
   onNavClick,
   onQuoteOpen,
+  onClose,
 }: MobileMenuProps) {
-  /* iOS-reliable scroll lock: saves scrollY, sets position:fixed on body */
   const savedScroll = useRef(0);
 
+  /* iOS scroll lock */
   useEffect(() => {
     if (isOpen) {
       savedScroll.current = window.scrollY;
@@ -233,62 +239,43 @@ function MobileMenu({
       });
     } else {
       Object.assign(document.body.style, {
-        overflow: "",
-        position: "",
-        width: "",
-        top: "",
+        overflow: "", position: "", width: "", top: "",
       });
       window.scrollTo({ top: savedScroll.current, behavior: "instant" });
     }
-
     return () => {
       Object.assign(document.body.style, {
-        overflow: "",
-        position: "",
-        width: "",
-        top: "",
+        overflow: "", position: "", width: "", top: "",
       });
     };
   }, [isOpen]);
 
-  /* Overlay variants — full panel slides down from top */
+  /* Animation variants */
   const panelVariants = {
-    hidden: { opacity: 0, y: "-6%", scale: 0.98 },
-    visible: {
-      opacity: 1,
-      y: "0%",
-      scale: 1,
-      transition: { duration: 0.32, ease: [0.16, 1, 0.3, 1] as const },
-    },
-    exit: {
-      opacity: 0,
-      y: "-4%",
-      scale: 0.98,
-      transition: { duration: 0.22, ease: [0.4, 0, 1, 1] as const },
-    },
+    hidden:  { opacity: 0, y: "-5%", scale: 0.98 },
+    visible: { opacity: 1, y: "0%", scale: 1,
+      transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] as const } },
+    exit:    { opacity: 0, y: "-3%", scale: 0.98,
+      transition: { duration: 0.2, ease: [0.4, 0, 1, 1] as const } },
   };
 
-  /* Stagger for nav items */
   const listVariants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.045, delayChildren: 0.1 } },
-    exit: {},
+    hidden:  {},
+    visible: { transition: { staggerChildren: 0.04, delayChildren: 0.08 } },
+    exit:    {},
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, x: -18 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { ease: [0.16, 1, 0.3, 1] as const, duration: 0.38 },
-    },
-    exit: { opacity: 0 },
+    hidden:   { opacity: 0, x: -16 },
+    visible:  { opacity: 1, x: 0,
+      transition: { ease: [0.16, 1, 0.3, 1] as const, duration: 0.35 } },
+    exit:     { opacity: 0 },
   };
 
-  const footerVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0, transition: { delay: 0.32, duration: 0.3 } },
-    exit: { opacity: 0 },
+  const bottomVariants = {
+    hidden:  { opacity: 0, y: 8 },
+    visible: { opacity: 1, y: 0, transition: { delay: 0.28, duration: 0.28 } },
+    exit:    { opacity: 0 },
   };
 
   return (
@@ -303,11 +290,35 @@ function MobileMenu({
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="fixed inset-0 z-40 bg-white flex flex-col xl:hidden overflow-y-auto overscroll-contain"
+          /* z-60 > header z-50 → menu fully covers the header bar */
+          className="fixed inset-0 z-60 bg-white flex flex-col xl:hidden overflow-y-auto overscroll-contain"
           style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
         >
-          {/* ── Top spacer (matches header height) ── */}
-          <div className="h-16 sm:h-20 shrink-0" />
+
+          {/* ── Own header row (logo + close) ── */}
+          <div className="flex items-center justify-between px-4 sm:px-6 h-16 sm:h-20 border-b border-neutral-100 shrink-0">
+            <Link
+              href={`/${lang}`}
+              onClick={onClose}
+              className="flex items-center"
+              aria-label="VVA-logistic — на головну"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/logo.svg"
+                alt="VVA-logistic"
+                className="h-10 sm:h-12 w-auto"
+              />
+            </Link>
+
+            <button
+              onClick={onClose}
+              aria-label="Close menu"
+              className="p-2.5 rounded-full bg-brand-blue/5 text-brand-blue cursor-pointer transition-colors hover:bg-brand-blue/10"
+            >
+              <X className="h-4.5 w-4.5" />
+            </button>
+          </div>
 
           {/* ── Navigation list ── */}
           <motion.nav
@@ -315,24 +326,19 @@ function MobileMenu({
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="flex-1 px-5 sm:px-8 pt-4 pb-6"
+            className="px-5 sm:px-8 pt-2 pb-4"
           >
-            {navigation.map((item, idx) => (
+            {navigation.map((item) => (
               <motion.div key={item.name} variants={itemVariants}>
                 <Link
                   href={isSubPage ? `/${lang}${item.href}` : item.href}
                   onClick={(e) => onNavClick(e, item.href)}
                   className="flex items-center justify-between py-4 sm:py-5 border-b border-neutral-100 group"
                 >
-                  <div className="flex items-baseline gap-3">
-                    <span className="text-[10px] font-black text-brand-light-blue tracking-widest tabular-nums select-none">
-                      0{idx + 1}
-                    </span>
-                    <span className="text-2xl sm:text-3xl font-black tracking-tight text-brand-blue uppercase group-active:text-brand-light-blue transition-colors">
-                      {item.name}
-                    </span>
-                  </div>
-                  <span className="text-brand-light-blue opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity text-xl">
+                  <span className="text-2xl sm:text-3xl font-black tracking-tight text-brand-blue uppercase group-active:text-brand-light-blue transition-colors">
+                    {item.name}
+                  </span>
+                  <span className="text-brand-light-blue opacity-0 group-active:opacity-100 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity text-xl">
                     →
                   </span>
                 </Link>
@@ -340,34 +346,31 @@ function MobileMenu({
             ))}
           </motion.nav>
 
-          {/* ── Footer section ── */}
+          {/* Push bottom section to the end */}
+          <div className="flex-1" />
+
+          {/* ── Bottom section ── */}
           <motion.div
-            variants={footerVariants}
+            variants={bottomVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="px-5 sm:px-8 pt-4 pb-8 space-y-5"
-            style={{
-              paddingBottom: "max(2rem, env(safe-area-inset-bottom, 2rem))",
-            }}
+            className="px-5 sm:px-8 pb-8 space-y-4 border-t border-neutral-100"
+            style={{ paddingBottom: "max(2rem, env(safe-area-inset-bottom, 2rem))" }}
           >
-            {/* Divider */}
-            <div className="w-full h-px bg-neutral-100" />
-
-            {/* Language switcher row */}
-            <div className="flex items-center justify-between">
+            {/* Language */}
+            <div className="flex items-center justify-between pt-4">
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400">
                 {dict.header.lang_label}
               </span>
               <LanguageSwitcher currentLang={lang} isScrolled={true} />
             </div>
 
-            {/* Divider */}
             <div className="w-full h-px bg-neutral-100" />
 
-            {/* Contact block */}
+            {/* Contacts */}
             <div className="space-y-2">
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400 mb-3">
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400">
                 {dict.header.contact_label}
               </p>
               <a
@@ -379,13 +382,13 @@ function MobileMenu({
               </a>
               <a
                 href={PHONE_2.href}
-                className="flex items-center gap-2.5 text-base sm:text-lg font-bold text-brand-blue/70 active:text-brand-light-blue transition-colors pl-6"
+                className="flex items-center gap-2.5 text-base font-bold text-brand-blue/70 active:text-brand-light-blue transition-colors pl-[26px]"
               >
                 {PHONE_2.display}
               </a>
               <a
                 href={`mailto:${EMAIL}`}
-                className="flex items-center gap-2.5 text-sm font-bold text-brand-light-blue active:underline mt-1"
+                className="flex items-center gap-2.5 text-sm font-bold text-brand-light-blue active:underline"
               >
                 <Mail className="h-4 w-4 shrink-0" />
                 {EMAIL}
@@ -395,7 +398,7 @@ function MobileMenu({
             {/* CTA */}
             <button
               onClick={onQuoteOpen}
-              className="w-full bg-brand-blue text-white font-black text-base uppercase tracking-widest py-4 rounded-xl shadow-xl shadow-brand-blue/20 active:scale-[0.98] transition-all"
+              className="w-full bg-brand-blue text-white font-black text-base uppercase tracking-widest py-4 rounded-xl shadow-xl shadow-brand-blue/20 active:scale-[0.98] transition-all cursor-pointer"
             >
               {dict.header.calculate}
             </button>
