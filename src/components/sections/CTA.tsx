@@ -12,9 +12,9 @@ export function CTA({ dict }: { dict: Dictionary["cta"] }) {
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10 text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6 }}
           className="max-w-4xl mx-auto"
         >

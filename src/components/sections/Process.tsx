@@ -24,9 +24,9 @@ export function Process({ dict, formDict }: { dict: Dictionary["process"]; formD
             {dict.steps.map((step, idx) => (
               <div key={idx} className="relative">
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true, amount: 0.1 }}
                   transition={{ delay: idx * 0.1 }}
                   className="flex flex-col items-center text-center group"
                 >

@@ -56,9 +56,9 @@ export function Services({ dict }: { dict: Dictionary["services"] }) {
           {services.map((service, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ delay: idx * 0.05 }}
               className="group p-6 sm:p-8 bg-white border border-neutral-100 hover:bg-brand-blue transition-all duration-500 shadow-sm hover:shadow-2xl hover:shadow-brand-blue/20 cursor-default h-full flex flex-col"
             >

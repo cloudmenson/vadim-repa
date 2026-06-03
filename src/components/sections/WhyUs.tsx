@@ -30,9 +30,9 @@ export function WhyUs({ dict }: { dict: Dictionary["whyUs"] }) {
             return (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.1 }}
                 transition={{ delay: idx * 0.1 }}
                 className="group p-6 sm:p-8 border border-neutral-100 bg-neutral-50 hover:bg-white hover:shadow-2xl hover:shadow-brand-blue/5 transition-all duration-500 relative overflow-hidden"
               >
