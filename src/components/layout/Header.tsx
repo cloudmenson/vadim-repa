@@ -14,7 +14,7 @@ import { handleSmoothScroll } from "@/lib/utils/scroll";
 
 /* ── Constants ─────────────────────────────────────────── */
 const PHONE_1 = { display: "+380 (96) 780 42 47", href: "tel:+380967804247" };
-const PHONE_2 = { display: "+380 077 024 00 73", href: "tel:+380770240073" };
+const PHONE_2 = { display: "+380 (77) 024 00 73", href: "tel:+380770240073" };
 const EMAIL = "vva-logistic@ukr.net";
 
 /* ─────────────────────────────────────────────────────────

@@ -71,7 +71,7 @@ export function Footer({ dict }: { dict: Dictionary["footer"] }) {
                 href="tel:+380770240073"
                 className="text-base font-black text-white hover:text-brand-light-blue transition-colors"
               >
-                +380 077 024 00 73
+                +380 (77) 024 00 73
               </a>
             </div>
           </div>
@@ -146,7 +146,7 @@ export function Footer({ dict }: { dict: Dictionary["footer"] }) {
                     href="tel:+380770240073"
                     className="block text-sm hover:text-brand-light-blue transition-colors font-bold"
                   >
-                    +380 077 024 00 73
+                    +380 (77) 024 00 73
                   </a>
                 </div>
               </li>
